@@ -1,0 +1,133 @@
+
+Copiar código
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fotógrafo y creativo en Madrid y Bogotá. Servicios de fotografía profesional y diseño creativo.">
+    <meta name="keywords" content="fotógrafo Madrid, fotógrafo Bogotá, fotografía profesional, servicios creativos, fotógrafo moderno">
+    <title>Tu Nombre - Fotógrafo y Creativo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #1e1e1e;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff9800;
+        }
+
+        .section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .portfolio img:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: #1e1e1e;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Tu Nombre - Fotógrafo y Creativo</h1>
+        <nav>
+            <a href="#about">Sobre Mí</a>
+            <a href="#portfolio">Portafolio</a>
+            <a href="#services">Servicios</a>
+            <a href="#contact">Contacto</a>
+        </nav>
+    </header>
+
+    <section id="about" class="section">
+        <h2>Sobre Mí</h2>
+        <p>Soy un fotógrafo y creativo con base en Madrid y Bogotá, especializado en capturar momentos únicos y ofrecer servicios creativos que destacan. Mi enfoque es moderno, artístico y siempre centrado en los detalles que marcan la diferencia.</p>
+    </section>
+
+    <section id="portfolio" class="section">
+        <h2>Portafolio</h2>
+        <div class="portfolio">
+            <!-- Aquí puedes añadir tus fotografías -->
+            <img src="ruta/a/tu/imagen1.jpg" alt="Fotografía 1">
+            <img src="ruta/a/tu/imagen2.jpg" alt="Fotografía 2">
+            <img src="ruta/a/tu/imagen3.jpg" alt="Fotografía 3">
+            <img src="ruta/a/tu/imagen4.jpg" alt="Fotografía 4">
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <h2>Servicios</h2>
+        <p>Ofrezco servicios de fotografía profesional y diseño creativo para capturar la esencia de cada proyecto. Desde eventos hasta sesiones personales y comerciales, mi objetivo es siempre ofrecer calidad y creatividad en cada imagen.</p>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Contacto</h2>
+        <p>¿Te gustaría trabajar conmigo? Ponte en contacto para más información.</p>
+        <p>Email: <a href="mailto:tuemail@example.com">tuemail@example.com</a></p>
+        <p>Teléfono: +34 123 456 789</p>
+    </section>
+
+    <footer>
+        <p>© 2024 Tu Nombre. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
