@@ -507,7 +507,7 @@
 
       const recs = [];
       if (!me.ads) recs.push(list.some(c => c.ads)
-        ? `${list.filter(c => c.ads).length} de tus competidores ya hacen anuncios en Meta y tú no: te están quitando a los clientes que buscan ahora.`
+        ? (n => n === 1 ? '1 competidor ya hace anuncios en Meta y tú no: te está quitando clientes ahora mismo.' : `${n} competidores ya hacen anuncios en Meta y tú no: te están quitando clientes ahora mismo.`)(list.filter(c => c.ads).length)
         : 'Ninguno de tus competidores hace anuncios en Meta: es una oportunidad para llegar primero.');
       if (!me.web) recs.push('No tienes web propia: es la brecha más fácil de cerrar para que te encuentren en Google y en ChatGPT.');
       if (me.reviews < avg('reviews')) recs.push(`Tienes ${me.reviews} reseñas frente a un promedio de ${Math.round(avg('reviews'))}: pide reseñas a clientes satisfechos, por ejemplo con un mensaje automático por WhatsApp.`);
