@@ -187,6 +187,32 @@
   .wa-float:hover{transform:scale(1.08)}
   .wa-float svg{width:30px;height:30px;fill:#000}
 
+  /* motor de competitividad */
+  .mc{text-align:left}
+  .mc-title{font-size:1rem;margin:22px 0 10px}
+  .mc-head,.mc-row{display:grid;grid-template-columns:2fr 1fr 1fr auto auto 32px;gap:8px;align-items:center}
+  .mc-row[data-me]{grid-template-columns:2fr 1fr 1fr auto auto 32px}
+  .mc-head{font-size:.78rem;color:var(--muted);margin-bottom:6px}
+  .mc-head span:nth-child(n+4){text-align:center}
+  .mc-row{margin-bottom:8px}
+  .mc-row input{padding:10px}
+  .chk{display:flex;align-items:center;gap:5px;margin:0;font-size:.85rem;color:var(--text);cursor:pointer}
+  .chk input{width:18px;height:18px;accent-color:var(--accent)}
+  .mc-del{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;height:38px;cursor:pointer}
+  .mc-small{padding:9px 14px;font-size:.88rem;cursor:pointer}
+  .mc-err{color:var(--accent);font-size:.88rem;min-height:1.2em;margin-top:8px}
+  .mc-table{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:10px}
+  .mc-table th,.mc-table td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:left}
+  .mc-table th{color:var(--muted);font-weight:500}
+  .mc-table tr.me td{color:var(--accent);font-weight:600}
+  .mc-recs{padding-left:20px;color:var(--muted)}
+  .mc-recs li{margin-bottom:6px}
+  @media(max-width:640px){
+    .mc-head{display:none}
+    .mc-row{grid-template-columns:1fr 1fr;padding:12px;border:1px solid var(--line);border-radius:10px}
+    .mc-row .n{grid-column:1/-1}
+  }
+
   footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.85rem}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </style>
@@ -200,6 +226,7 @@
       <a href="#servicios">Servicios</a>
       <a href="#proceso">Proceso</a>
       <a href="#sobre-mi">Sobre mí</a>
+      <a href="#analisis">Analiza tu competencia</a>
       <a href="#faq">FAQ</a>
       <a href="#contacto" class="btn">Hablemos</a>
     </div>
@@ -326,6 +353,41 @@
   </div>
 </section>
 
+<section id="analisis">
+  <div class="wrap" style="max-width:900px">
+    <div class="head">
+      <small>Herramienta gratis</small>
+      <h2>Motor de competitividad</h2>
+      <p>Compara tu negocio con tus competidores de la zona en 1 minuto. Busca a cada uno en Google Maps y copia su calificación y número de reseñas. Para saber si hacen anuncios, búscalos en la Biblioteca de Anuncios de Meta.</p>
+    </div>
+    <div class="card mc reveal">
+      <div class="row">
+        <div><label for="mc-type">Tipo de negocio</label><input id="mc-type" placeholder="Ej. consultorio dental"></div>
+        <div><label for="mc-zone">Ciudad y zona</label><input id="mc-zone" placeholder="Ej. Chapinero, Bogotá"></div>
+      </div>
+      <h3 class="mc-title">Tu negocio</h3>
+      <div class="mc-head"><span>Nombre</span><span>Calificación</span><span>Reseñas</span><span>Web</span><span>Anuncios</span></div>
+      <div class="mc-row" data-me="1">
+        <input class="n" placeholder="Tu negocio"><input class="r" type="number" step="0.1" min="1" max="5" placeholder="4.6"><input class="v" type="number" min="0" placeholder="120">
+        <label class="chk"><input type="checkbox" class="w"><span>Web</span></label><label class="chk"><input type="checkbox" class="a"><span>Ads</span></label>
+      </div>
+      <h3 class="mc-title">Competidores</h3>
+      <div id="mc-comps"></div>
+      <button type="button" id="mc-add" class="btn ghost mc-small">+ Añadir competidor</button>
+      <p id="mc-err" class="mc-err"></p>
+      <button type="button" id="mc-run" class="btn" style="width:100%;margin-top:8px">Analizar competencia</button>
+    </div>
+    <div id="mc-out" class="card mc" style="display:none;margin-top:18px">
+      <h3 id="mc-sum"></h3>
+      <div style="overflow-x:auto"><table class="mc-table"><thead><tr><th>#</th><th>Negocio</th><th>Calif.</th><th>Reseñas</th><th>Web</th><th>Anuncios</th><th>Puntaje</th></tr></thead><tbody id="mc-rows"></tbody></table></div>
+      <h3 class="mc-title">Qué mejorar</h3>
+      <ul id="mc-recs" class="mc-recs"></ul>
+      <p class="note" style="text-align:left">Puntaje sobre 100: calificación 40, reseñas 30, web 15, anuncios activos en Meta 15.</p>
+      <button type="button" id="mc-wa" class="btn wa" style="width:100%;margin-top:14px">Quiero que George revise mi resultado</button>
+    </div>
+  </div>
+</section>
+
 <section id="contacto" class="alt final">
   <div class="wrap">
     <h2>¿Cuántos clientes se te escapan entre el anuncio y la venta?</h2>
@@ -395,6 +457,72 @@
     bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
     hero.style.setProperty('--y', h.scrollTop * 0.4 + 'px');
   }, { passive: true });
+
+  // Motor de competitividad
+  (function () {
+    const comps = document.getElementById('mc-comps');
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+    function addRow() {
+      if (comps.children.length >= 8) return;
+      const d = document.createElement('div');
+      d.className = 'mc-row';
+      d.innerHTML = '<input class="n" placeholder="Competidor"><input class="r" type="number" step="0.1" min="1" max="5" placeholder="4.5"><input class="v" type="number" min="0" placeholder="80">' +
+        '<label class="chk"><input type="checkbox" class="w"><span>Web</span></label><label class="chk"><input type="checkbox" class="a"><span>Ads</span></label>' +
+        '<button type="button" class="mc-del" aria-label="Quitar">×</button>';
+      d.querySelector('.mc-del').onclick = () => d.remove();
+      comps.appendChild(d);
+    }
+    addRow(); addRow(); addRow();
+    document.getElementById('mc-add').onclick = addRow;
+
+    const read = el => ({
+      name: el.querySelector('.n').value.trim(),
+      rating: parseFloat(el.querySelector('.r').value),
+      reviews: parseInt(el.querySelector('.v').value, 10) || 0,
+      web: el.querySelector('.w').checked,
+      ads: el.querySelector('.a').checked
+    });
+    const score = p => Math.round(Math.min(Math.max(p.rating, 0), 5) / 5 * 40 + Math.min(p.reviews / 300, 1) * 30 + (p.web ? 15 : 0) + (p.ads ? 15 : 0));
+    let last = '';
+
+    document.getElementById('mc-run').onclick = () => {
+      const err = document.getElementById('mc-err');
+      const me = read(document.querySelector('.mc-row[data-me]'));
+      if (!me.name) me.name = 'Tu negocio';
+      const list = [...comps.children].map(read).filter(c => c.name && !isNaN(c.rating));
+      if (isNaN(me.rating)) { err.textContent = 'Pon la calificación de tu negocio.'; return; }
+      if (!list.length) { err.textContent = 'Añade al menos un competidor con nombre y calificación.'; return; }
+      err.textContent = '';
+      me.me = true;
+      const all = list.concat([me]).map(p => (p.score = score(p), p)).sort((a, b) => b.score - a.score);
+      const rank = all.indexOf(me) + 1;
+      const avg = k => list.reduce((s, c) => s + c[k], 0) / list.length;
+      const avgScore = Math.round(avg('score'));
+      const leader = all.find(p => !p.me);
+      const zone = document.getElementById('mc-zone').value.trim();
+
+      document.getElementById('mc-sum').textContent = `Quedas en el puesto ${rank} de ${all.length}${zone ? ' en ' + zone : ''}. Tu puntaje: ${me.score} · promedio de la competencia: ${avgScore}.`;
+      document.getElementById('mc-rows').innerHTML = all.map((p, i) =>
+        `<tr${p.me ? ' class="me"' : ''}><td>${i + 1}</td><td>${esc(p.name)}${p.me ? ' (tú)' : ''}</td><td>${p.rating.toFixed(1)}</td><td>${p.reviews}</td><td>${p.web ? 'Sí' : 'No'}</td><td>${p.ads ? 'Sí' : 'No'}</td><td><b>${p.score}</b></td></tr>`).join('');
+
+      const recs = [];
+      if (!me.ads) recs.push(list.some(c => c.ads)
+        ? `${list.filter(c => c.ads).length} de tus competidores ya hacen anuncios en Meta y tú no: te están quitando a los clientes que buscan ahora.`
+        : 'Ninguno de tus competidores hace anuncios en Meta: es una oportunidad para llegar primero.');
+      if (!me.web) recs.push('No tienes web propia: es la brecha más fácil de cerrar para que te encuentren en Google y en ChatGPT.');
+      if (me.reviews < avg('reviews')) recs.push(`Tienes ${me.reviews} reseñas frente a un promedio de ${Math.round(avg('reviews'))}: pide reseñas a clientes satisfechos, por ejemplo con un mensaje automático por WhatsApp.`);
+      if (leader && me.rating < leader.rating) recs.push(`Tu calificación (${me.rating.toFixed(1)}) está por debajo de la del líder, ${leader.name} (${leader.rating.toFixed(1)}): responde todas las reseñas, sobre todo las negativas.`);
+      if (!recs.length) recs.push('Tu posición es sólida. El siguiente paso es escalar los anuncios y medir el costo por cliente.');
+      document.getElementById('mc-recs').innerHTML = recs.map(r => `<li>${esc(r)}</li>`).join('');
+
+      const type = document.getElementById('mc-type').value.trim();
+      last = `Hola George, usé el motor de competitividad${type ? ' (' + type + ')' : ''}${zone ? ' en ' + zone : ''}. Quedé en el puesto ${rank} de ${all.length} con ${me.score} puntos. Quiero que revises mi resultado.`;
+      const out = document.getElementById('mc-out');
+      out.style.display = 'block';
+      out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    document.getElementById('mc-wa').onclick = () => window.open('https://wa.me/34627021222?text=' + encodeURIComponent(last), '_blank');
+  })();
 
   // Send form via WhatsApp
   document.getElementById('wa-send').addEventListener('click', () => {
