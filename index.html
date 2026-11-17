@@ -11,8 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b0d12; --bg2:#12151d; --card:#161a24; --line:#232838;
-    --text:#eef0f5; --muted:#9aa2b4; --accent:#c6ff3d; --accent2:#5b8cff;
+    --bg:#000000; --bg2:#0b0b0b; --card:#121212; --line:#262626;
+    --text:#f5f5f5; --muted:#a3a3a3; --accent:#ff7a1a; --accent2:#ffa45c;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -22,23 +22,23 @@
   h1,h2,h3{font-family:"Space Grotesk",sans-serif;line-height:1.1;letter-spacing:-.02em}
 
   /* nav */
-  nav{position:sticky;top:0;z-index:10;background:rgba(11,13,18,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
   .logo{font-family:"Space Grotesk";font-weight:700;font-size:1.15rem;text-decoration:none}
   .logo span{color:var(--accent)}
   .links{display:flex;gap:26px;align-items:center}
   .links a{text-decoration:none;color:var(--muted);font-size:.95rem}
   .links a:hover{color:var(--text)}
-  .btn{display:inline-block;background:var(--accent);color:#0b0d12;font-weight:600;text-decoration:none;padding:13px 22px;border-radius:10px;transition:transform .15s}
+  .btn{display:inline-block;background:var(--accent);color:#000;font-weight:600;text-decoration:none;padding:13px 22px;border-radius:10px;transition:transform .15s}
   .btn:hover{transform:translateY(-2px)}
   .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
-  .links .btn{padding:9px 16px;color:#0b0d12}
+  .links .btn{padding:9px 16px;color:#000}
   @media(max-width:760px){.links a:not(.btn){display:none}}
 
   /* hero */
   .hero{padding:96px 0 80px;position:relative;overflow:hidden}
-  .hero::before{content:"";position:absolute;width:620px;height:620px;right:-180px;top:-200px;background:radial-gradient(circle,rgba(91,140,255,.22),transparent 65%);pointer-events:none}
-  .tag{display:inline-block;font-size:.8rem;color:var(--accent);border:1px solid rgba(198,255,61,.35);padding:5px 12px;border-radius:99px;margin-bottom:22px}
+  .hero::before{content:"";position:absolute;width:620px;height:620px;right:-180px;top:-200px;background:radial-gradient(circle,rgba(255,122,26,.22),transparent 65%);pointer-events:none}
+  .tag{display:inline-block;font-size:.8rem;color:var(--accent);border:1px solid rgba(255,122,26,.35);padding:5px 12px;border-radius:99px;margin-bottom:22px}
   .hero h1{font-size:clamp(2.3rem,6vw,4.2rem);max-width:820px}
   .hero h1 em{font-style:normal;color:var(--accent)}
   .hero p{color:var(--muted);font-size:1.15rem;max-width:620px;margin:22px 0 34px}
@@ -57,8 +57,8 @@
 
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;transition:border-color .2s}
-  .card:hover{border-color:rgba(198,255,61,.4)}
-  .icon{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;background:rgba(198,255,61,.1);margin-bottom:18px}
+  .card:hover{border-color:rgba(255,122,26,.4)}
+  .icon{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;background:rgba(255,122,26,.1);margin-bottom:18px}
   .icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2}
   .card h3{font-size:1.25rem;margin-bottom:10px}
   .card p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
@@ -94,6 +94,35 @@
   .final .cta{justify-content:center}
   .contact-line{margin-top:26px;color:var(--muted);font-size:.95rem}
 
+  /* scroll motion */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:20}
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .grid .reveal:nth-child(2),.steps .reveal:nth-child(2){transition-delay:.1s}
+  .grid .reveal:nth-child(3),.steps .reveal:nth-child(3){transition-delay:.2s}
+  .grid .reveal:nth-child(4),.steps .reveal:nth-child(4){transition-delay:.3s}
+  .hero::before{will-change:transform;transform:translateY(var(--y,0))}
+  .flow b{animation:pulse 3s ease-in-out infinite}
+  .flow b:nth-of-type(2){animation-delay:.75s}.flow b:nth-of-type(3){animation-delay:1.5s}.flow b:nth-of-type(4){animation-delay:2.25s}
+  @keyframes pulse{0%,70%,100%{border-color:var(--line)}35%{border-color:var(--accent);box-shadow:0 0 18px rgba(255,122,26,.35)}}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.flow b{animation:none}}
+
+  /* form */
+  form{max-width:620px;margin:0 auto;text-align:left;display:grid;gap:14px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:600px){.row{grid-template-columns:1fr}}
+  label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:6px}
+  input,select,textarea{width:100%;background:var(--card);border:1px solid var(--line);color:var(--text);padding:13px 14px;border-radius:10px;font:inherit}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  textarea{min-height:120px;resize:vertical}
+  .send{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+  .send button{flex:1;min-width:200px;border:0;cursor:pointer;font:inherit}
+  .btn.wa{background:#25d366;color:#000}
+  .note{font-size:.82rem;color:var(--muted);text-align:center}
+  .wa-float{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.5);z-index:15;transition:transform .2s}
+  .wa-float:hover{transform:scale(1.08)}
+  .wa-float svg{width:30px;height:30px;fill:#000}
+
   footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.85rem}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </style>
@@ -120,7 +149,7 @@
     <p>Gestiono tus campañas en Facebook e Instagram, automatizo las respuestas con ManyChat y conecto cada lead a Kommo para que tu equipo venda, no persiga mensajes.</p>
     <div class="cta">
       <a href="#contacto" class="btn">Agenda una auditoría gratuita</a>
-      <a href="#servicios" class="btn ghost">Ver servicios</a>
+      <a href="https://wa.me/34627021222" target="_blank" rel="noopener" class="btn ghost">Escríbeme por WhatsApp</a>
     </div>
     <div class="flow">
       <b>Anuncio en Meta</b><i>→</i><b>ManyChat responde</b><i>→</i><b>Lead en Kommo</b><i>→</i><b>Venta medida con CAPI</b>
@@ -234,12 +263,40 @@
   <div class="wrap">
     <h2>¿Cuántos clientes se te escapan entre el anuncio y la venta?</h2>
     <p>Pide una auditoría gratuita de tus anuncios y tu proceso de atención.</p>
-    <div class="cta">
-      <a class="btn" href="mailto:georgecrux1@gmail.com?subject=Auditor%C3%ADa%20gratuita">Escríbeme por email</a>
+    <form id="contact-form" class="reveal" action="https://formsubmit.co/georgecrux1@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Nuevo contacto desde la web">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none">
+      <div class="row">
+        <div><label for="f-name">Nombre</label><input id="f-name" name="Nombre" required></div>
+        <div><label for="f-company">Empresa</label><input id="f-company" name="Empresa"></div>
+      </div>
+      <div class="row">
+        <div><label for="f-email">Email</label><input id="f-email" type="email" name="email" required></div>
+        <div><label for="f-phone">WhatsApp / Teléfono</label><input id="f-phone" type="tel" name="Telefono"></div>
+      </div>
+      <div><label for="f-service">¿Qué necesitas?</label>
+        <select id="f-service" name="Servicio">
+          <option>Meta Ads (Facebook e Instagram)</option>
+          <option>Automatización con ManyChat</option>
+          <option>CRM Kommo</option>
+          <option>Píxel + API de Conversiones</option>
+          <option>Sistema completo</option>
+        </select>
+      </div>
+      <div><label for="f-msg">Cuéntame de tu negocio</label><textarea id="f-msg" name="Mensaje" required></textarea></div>
+      <div class="send">
+        <button type="submit" class="btn">Enviar por email</button>
+        <button type="button" id="wa-send" class="btn wa">Enviar por WhatsApp</button>
+      </div>
+      <p class="note">Respondo en menos de 24 horas.</p>
+    </form>
+    <div class="cta" style="margin-top:30px">
       <a class="btn ghost" href="https://www.linkedin.com/in/georgecrux" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn ghost" href="https://www.instagram.com/trefiker" target="_blank" rel="noopener">Instagram</a>
     </div>
-    <p class="contact-line">georgecrux1@gmail.com</p>
+    <p class="contact-line">georgecrux1@gmail.com · WhatsApp +34 627 021 222</p>
   </div>
 </section>
 
@@ -249,6 +306,40 @@
     <span>Meta Ads · ManyChat · Kommo · Colombia y España</span>
   </div>
 </footer>
+
+<div id="progress"></div>
+<a class="wa-float" href="https://wa.me/34627021222?text=Hola%20George%2C%20quiero%20informaci%C3%B3n%20sobre%20tus%20servicios" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+</a>
+
+<script>
+  // Reveal on scroll
+  document.querySelectorAll('.head, .card, .step, .about > div, details, .final h2, .flow').forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Progress bar + hero glow parallax
+  const bar = document.getElementById('progress');
+  const hero = document.querySelector('.hero');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+    hero.style.setProperty('--y', h.scrollTop * 0.4 + 'px');
+  }, { passive: true });
+
+  // Send form via WhatsApp
+  document.getElementById('wa-send').addEventListener('click', () => {
+    const f = document.getElementById('contact-form');
+    if (!f.reportValidity()) return;
+    const v = id => document.getElementById(id).value.trim();
+    const text = `Hola George, soy ${v('f-name')}` + (v('f-company') ? ` de ${v('f-company')}` : '') +
+      `.\nServicio: ${v('f-service')}\nEmail: ${v('f-email')}` + (v('f-phone') ? `\nTel: ${v('f-phone')}` : '') +
+      `\n\n${v('f-msg')}`;
+    window.open('https://wa.me/34627021222?text=' + encodeURIComponent(text), '_blank');
+  });
+</script>
 
 </body>
 </html>
