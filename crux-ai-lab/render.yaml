@@ -1,0 +1,17 @@
+# Blueprint de Render (https://render.com). Raíz del servicio: crux-ai-lab/
+services:
+  - type: web
+    name: crux-ai-lab
+    runtime: docker
+    rootDir: crux-ai-lab
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: APP_ACCESS_TOKEN
+        generateValue: true
+      - key: ALLOW_PRIVATE_TARGETS
+        value: "false"
+      - key: MAX_REQUESTS_PER_MINUTE
+        value: "60"
+      - key: ANTHROPIC_API_KEY
+        sync: false

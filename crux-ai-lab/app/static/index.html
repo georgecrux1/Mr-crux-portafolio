@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRUX AI LAB</title>
+<meta name="description" content="Pruebas automatizadas de seguridad para chatbots LLM propios o autorizados.">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">C</span><div><strong>CRUX AI LAB</strong><small>Chatbot Security Tester</small></div></div>
+  <nav id="tabs">
+    <button data-tab="dashboard" class="active">Panel</button>
+    <button data-tab="run">Ejecutar</button>
+    <button data-tab="targets">Chatbots</button>
+    <button data-tab="history">Historial</button>
+    <button data-tab="compare">Comparar</button>
+  </nav>
+</header>
+
+<main>
+  <div class="notice">Uso exclusivo sobre chatbots <b>propios</b> o con <b>autorización expresa</b>. Las pruebas no generan contenido dañino: miden si el bot respeta sus reglas con marcadores y secretos ficticios.</div>
+
+  <!-- PANEL -->
+  <section id="tab-dashboard" class="tab active">
+    <div class="kpis">
+      <div class="kpi"><span>Total de pruebas</span><b id="k-total">0</b></div>
+      <div class="kpi ok"><span>Superadas</span><b id="k-pass">0</b></div>
+      <div class="kpi bad"><span>Fallidas (confirmadas)</span><b id="k-fail">0</b></div>
+      <div class="kpi warn"><span>En revisión</span><b id="k-review">0</b></div>
+      <div class="kpi"><span>Ejecuciones</span><b id="k-runs">0</b></div>
+      <div class="kpi"><span>Tokens consumidos</span><b id="k-tokens">0</b></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>Vulnerabilidades detectadas</h3><div id="vuln-list" class="list"></div></div>
+      <div class="card"><h3>Últimas ejecuciones</h3><div id="recent-runs" class="list"></div></div>
+    </div>
+  </section>
+
+  <!-- EJECUTAR -->
+  <section id="tab-run" class="tab">
+    <div class="grid2">
+      <form id="run-form" class="card">
+        <h3>Nueva ejecución</h3>
+        <label>Chatbot objetivo<select name="target_id" id="run-target" required></select></label>
+        <label>Número de pruebas
+          <div class="seg" id="size-seg"></div>
+        </label>
+        <div class="row3">
+          <label>Peticiones/min<input type="number" name="rpm" value="60" min="1" max="600"></label>
+          <label>Concurrencia<input type="number" name="concurrency" value="2" min="1" max="16"></label>
+          <label>Presupuesto tokens<input type="number" name="token_budget" id="budget" min="0" step="1000"></label>
+        </div>
+        <fieldset><legend>Categorías</legend><div id="cat-checks" class="checks"></div></fieldset>
+        <div class="actions"><button class="primary" type="submit">Iniciar pruebas</button></div>
+        <p class="hint" id="run-hint"></p>
+      </form>
+      <div class="card" id="live">
+        <h3>Ejecución en curso</h3>
+        <div id="live-body" class="muted">Ninguna ejecución seleccionada.</div>
+      </div>
+    </div>
+    <div class="card"><h3>Vista previa del generador</h3><div id="preview" class="list mono"></div></div>
+  </section>
+
+  <!-- CHATBOTS -->
+  <section id="tab-targets" class="tab">
+    <div class="grid2">
+      <form id="target-form" class="card">
+        <h3>Conectar chatbot</h3>
+        <label>Nombre<input name="name" required maxlength="80" placeholder="Mi bot de soporte"></label>
+        <label>Tipo
+          <select name="kind" id="kind">
+            <option value="mock">Simulado (local, gratis)</option>
+            <option value="anthropic">Anthropic Claude (API de pago)</option>
+            <option value="openai_compatible">API compatible OpenAI (Ollama gratis / OpenAI de pago)</option>
+            <option value="http_endpoint">Endpoint HTTP de mi chatbot</option>
+          </select>
+        </label>
+        <div class="kf" data-kind="mock">
+          <label>Nivel de seguridad simulado<select name="level"><option value="vulnerable">Vulnerable</option><option value="parcial" selected>Parcial</option><option value="robusto">Robusto</option></select></label>
+        </div>
+        <div class="kf" data-kind="anthropic">
+          <label>Modelo<input name="model" placeholder="claude-opus-5-5"></label>
+          <div class="row3">
+            <label>Esfuerzo<select name="effort"><option>low</option><option>medium</option><option>high</option></select></label>
+            <label>max_tokens<input type="number" name="max_tokens" value="1024" min="64" max="8192"></label>
+            <label>Variable de la clave<input name="api_key_env" placeholder="ANTHROPIC_API_KEY"></label>
+          </div>
+        </div>
+        <div class="kf" data-kind="openai_compatible">
+          <label>Base URL<input name="base_url" placeholder="http://localhost:11434/v1"></label>
+          <div class="row3">
+            <label>Modelo<input name="model_oa" placeholder="llama3.2"></label>
+            <label>Variable de la clave<input name="api_key_env_oa" placeholder="(vacío para Ollama)"></label>
+            <label class="inline"><input type="checkbox" name="use_lab_prompt" checked> Usar prompt de laboratorio</label>
+          </div>
+        </div>
+        <div class="kf" data-kind="http_endpoint">
+          <label>URL del endpoint<input name="url" placeholder="https://mi-bot.ejemplo.com/api/chat"></label>
+          <div class="row3">
+            <label>Campo mensaje<input name="message_field" value="message"></label>
+            <label>Campo historial<input name="history_field" value="history"></label>
+            <label>Ruta respuesta<input name="response_path" value="reply"></label>
+          </div>
+          <div class="row3">
+            <label>Variable del token<input name="auth_env" placeholder="MI_BOT_TOKEN"></label>
+            <label>Cabecera<input name="auth_header" value="Authorization"></label>
+            <label>Prefijo<input name="auth_prefix" value="Bearer "></label>
+          </div>
+        </div>
+        <label class="kf" data-kind="anthropic openai_compatible">Instrucciones extra del sistema (opcional)<textarea name="system_extra" rows="2"></textarea></label>
+        <label class="kf" data-kind="http_endpoint openai_compatible">Canarios sembrados en tu prompt (uno por línea)<textarea name="canaries" rows="2" placeholder="CANARIO-MI-BOT-8F2A"></textarea></label>
+        <label class="inline auth"><input type="checkbox" name="authorized" required> Confirmo que este chatbot es mío o que tengo autorización expresa por escrito para probarlo.</label>
+        <p class="hint">Las claves nunca se escriben aquí: indica solo el <b>nombre</b> de la variable de entorno definida en el servidor (.env).</p>
+        <div class="actions"><button class="primary" type="submit">Guardar chatbot</button></div>
+      </form>
+      <div class="card"><h3>Chatbots registrados</h3><div id="target-list" class="list"></div></div>
+    </div>
+  </section>
+
+  <!-- HISTORIAL -->
+  <section id="tab-history" class="tab">
+    <div class="card"><h3>Historial de ejecuciones</h3><div class="table-wrap"><table id="runs-table"><thead><tr><th>#</th><th>Objetivo</th><th>Estado</th><th>Pruebas</th><th>PASS</th><th>FAIL</th><th>REV</th><th>ERR</th><th>Tokens</th><th>Inicio</th><th></th></tr></thead><tbody></tbody></table></div></div>
+    <div class="card" id="detail" hidden>
+      <div class="detail-head"><h3 id="detail-title"></h3>
+        <div class="actions">
+          <select id="f-verdict"><option value="">Todos</option><option>FAIL</option><option>REVIEW</option><option>PASS</option><option>ERROR</option></select>
+          <button id="dl-csv">CSV</button><button id="dl-pdf">PDF</button>
+        </div>
+      </div>
+      <div id="detail-breakdown" class="bars"></div>
+      <div id="detail-results" class="results"></div>
+    </div>
+  </section>
+
+  <!-- COMPARAR -->
+  <section id="tab-compare" class="tab">
+    <div class="card"><h3>Comparación entre modelos</h3><p class="hint">% de pruebas superadas (sobre pruebas sin error). Agrega todas las ejecuciones de cada objetivo.</p><div id="compare" class="compare"></div></div>
+  </section>
+</main>
+
+<dialog id="token-dialog"><form method="dialog"><h3>Acceso protegido</h3><label>Token de acceso<input id="token-input" type="password" autocomplete="current-password"></label><div class="actions"><button class="primary" value="ok">Entrar</button></div></form></dialog>
+<div id="toast"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
