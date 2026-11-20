@@ -1,16 +1,11 @@
 import React from 'react';
 import {interpolate, useCurrentFrame} from 'remotion';
 import {FPS} from '../timeline';
+import {NUMBER_REWRITES, useLang, Word} from '../i18n';
 
-export type Word = {text: string; start: number; end: number};
+export type {Word};
 
-// Spoken numbers are shown as figures on screen.
-const REWRITES: [string[], string][] = [
-  [['two', 'hundred', 'thirty-seven'], '237'],
-  [['five', 'thousand', 'dollars,'], '$5,000,'],
-];
-
-const normalise = (words: Word[]): Word[] => {
+const normalise = (words: Word[], REWRITES: [string[], string][]): Word[] => {
   const out: Word[] = [];
   for (let i = 0; i < words.length; i++) {
     const hit = REWRITES.find(([seq]) => seq.every((s, k) => words[i + k]?.text.toLowerCase() === s));
@@ -44,8 +39,9 @@ const toLines = (words: Word[]) => {
  */
 export const Subtitles: React.FC<{words: Word[]; offset: number}> = ({words, offset}) => {
   const frame = useCurrentFrame();
+  const {lang} = useLang();
   const t = (frame - offset) / FPS;
-  const lines = toLines(normalise(words));
+  const lines = toLines(normalise(words, NUMBER_REWRITES[lang]));
   const line = lines.find((l, i) => {
     const end = lines[i + 1] ? lines[i + 1][0].start : l[l.length - 1].end + 0.5;
     return t >= l[0].start - 0.05 && t < end;

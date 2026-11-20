@@ -10,7 +10,8 @@ layers in Remotion.
 ```bash
 npm install
 npm run studio                       # live preview / edit
-npx remotion render EchoLabsPitch out/echo-labs-pitch.mp4 --crf=18
+npx remotion render EchoLabsPitch out/echo-labs-pitch.mp4 --crf=18      # English
+npx remotion render EchoLabsPitchES out/echo-labs-pitch-es.mp4 --crf=18 # Español
 npx remotion still CharacterModelSheet out/character-model-sheet.png
 ```
 
@@ -28,6 +29,12 @@ npx remotion still CharacterModelSheet out/character-model-sheet.png
 Narration was trimmed (scenes 2–3) so it fits at natural speed. The voice is "George cruz"
 (ElevenLabs). Subtitles use word-level timestamps from transcribing the narration
 (`src/captions/*.json`).
+
+## Languages
+
+`src/i18n.tsx` holds on-screen strings, voiceover files and word-timing captions for
+`en` and `es`. On-screen beats (the 237 counter, module cards, tags) are anchored to the
+moment the matching word is spoken, so they stay in sync in both languages.
 
 ## Architecture
 

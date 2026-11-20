@@ -5,10 +5,9 @@ import {LightingAndShadows} from '../components/LightingAndShadows';
 import {SceneImage} from '../components/SceneImage';
 import {PaperTag} from '../components/PaperTypography';
 import {COLORS} from '../timeline';
+import {useLang} from '../i18n';
 
 // voice starts at frame 14. "Latin America" ≈ 4.76 s, "internationally" ≈ 6.45 s
-const LATAM_AT = 14 + 140;
-const INTL_AT = 14 + 192;
 
 const ARCS = [
   {d: 'M 520 700 Q 820 380 1180 520', delay: 40},
@@ -21,6 +20,9 @@ const ARCS = [
 // 41–51 s · The city becomes a paper world; threads connect Latin America, Europe and beyond.
 export const Scene05Vision: React.FC = () => {
   const frame = useCurrentFrame();
+  const {t, at} = useLang();
+  const LATAM_AT = at(4, 'latam', 154);
+  const INTL_AT = at(4, 'intl', 206);
   return (
     <AbsoluteFill style={{background: COLORS.tealDark}}>
       <CameraMovement from={{scale: 1.3, x: 160, y: -40, rotate: -2}} to={{scale: 1.04, x: 0, y: 0, rotate: 0}}>
@@ -65,14 +67,14 @@ export const Scene05Vision: React.FC = () => {
       <div style={{position: 'absolute', left: 110, top: 100}}>
         <PaperTag delay={LATAM_AT} bg={COLORS.burgundy} rotate={-3}>
           <div style={{fontFamily: 'Archivo Black', fontSize: 40, color: COLORS.cream, letterSpacing: 2}}>
-            STARTING IN LATIN AMERICA
+            {t.latam}
           </div>
         </PaperTag>
       </div>
       <div style={{position: 'absolute', right: 110, top: 200}}>
         <PaperTag delay={INTL_AT} bg={COLORS.cream} rotate={3}>
           <div style={{fontFamily: 'Archivo Black', fontSize: 40, color: COLORS.teal, letterSpacing: 2}}>
-            → EUROPE & BEYOND
+            {t.beyond}
           </div>
         </PaperTag>
       </div>

@@ -6,10 +6,9 @@ import {LightingAndShadows} from '../components/LightingAndShadows';
 import {SceneImage} from '../components/SceneImage';
 import {PaperTag} from '../components/PaperTypography';
 import {COLORS} from '../timeline';
+import {useLang} from '../i18n';
 
 // voice starts at frame 16; "two hundred thirty-seven" ≈ 2.5–3.8 s; "But leads aren't enough" ≈ 5.4 s
-const NUM_AT = 16 + 75;
-const LEADS_AT = 16 + 163;
 
 const ChatBubble: React.FC<{x: number; y: number; delay: number; w: number}> = ({x, y, delay, w}) => {
   const frame = useCurrentFrame();
@@ -41,6 +40,9 @@ const ChatBubble: React.FC<{x: number; y: number; delay: number; w: number}> = (
 export const Scene03Experience: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {t, at} = useLang();
+  const NUM_AT = at(2, 'number', 91);
+  const LEADS_AT = at(2, 'leads', 179);
   const n = useCount(0, 237, NUM_AT - 8, 40);
   const numPop = spring({frame: frame - (NUM_AT - 10), fps, config: {damping: 9, stiffness: 120}});
   const bubbles = Array.from({length: 14}, (_, i) => ({
@@ -95,16 +97,16 @@ export const Scene03Experience: React.FC = () => {
             boxShadow: '0 3px 0 #23804f, 0 12px 20px rgba(0,0,0,0.35)',
           }}
         >
-          WHATSAPP ENQUIRIES
+          {t.enquiries}
         </div>
         <div style={{fontFamily: 'Inter', fontWeight: 700, fontSize: 24, color: COLORS.ink, marginTop: 10, letterSpacing: 2}}>
-          FROM ONE REAL CAMPAIGN
+          {t.oneCampaign}
         </div>
       </div>
       <div style={{position: 'absolute', left: 90, top: 80}}>
         <PaperTag delay={LEADS_AT} bg={COLORS.ink} rotate={-3}>
           <div style={{fontFamily: 'Archivo Black', fontSize: 40, color: COLORS.cream, letterSpacing: 2}}>
-            LEADS <span style={{color: COLORS.amber}}>≠</span> CUSTOMERS
+            {t.leadsNot[0]} <span style={{color: COLORS.amber}}>≠</span> {t.leadsNot[1]}
           </div>
         </PaperTag>
       </div>

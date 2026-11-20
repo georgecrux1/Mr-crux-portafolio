@@ -6,9 +6,12 @@ import {PaperCity} from '../components/PaperCity';
 import {SceneImage} from '../components/SceneImage';
 import {PaperTag} from '../components/PaperTypography';
 import {COLORS} from '../timeline';
+import {useLang} from '../i18n';
 
 // 0–10 s · An empty miniature paper street. Shop owners wait for customers who never come.
-export const Scene01Problem: React.FC = () => (
+export const Scene01Problem: React.FC = () => {
+  const {t} = useLang();
+  return (
   <AbsoluteFill style={{background: COLORS.tealDark}}>
     <CameraMovement from={{scale: 1.04, x: 60, y: 10}} to={{scale: 1.22, x: -40, y: 30}}>
       <SceneImage src="img/s1-city.png" brightness={0.92} />
@@ -27,16 +30,17 @@ export const Scene01Problem: React.FC = () => (
     <div style={{position: 'absolute', left: 90, top: 80}}>
       <PaperTag delay={10} bg={COLORS.cream} rotate={-3}>
         <div style={{fontFamily: 'Archivo Black', fontSize: 34, color: COLORS.burgundy, letterSpacing: 3}}>
-          THE PROBLEM
+          {t.problem}
         </div>
       </PaperTag>
     </div>
     <div style={{position: 'absolute', right: 110, top: 90}}>
       <PaperTag delay={120} bg={COLORS.burgundy} rotate={4}>
         <div style={{fontFamily: 'Archivo Black', fontSize: 40, color: COLORS.cream, letterSpacing: 2}}>
-          WHERE ARE THE CUSTOMERS?
+          {t.whereCustomers}
         </div>
       </PaperTag>
     </div>
   </AbsoluteFill>
-);
+  );
+};

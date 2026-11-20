@@ -8,18 +8,16 @@ import {SceneImage} from '../components/SceneImage';
 import {PaperTag, PaperTypography} from '../components/PaperTypography';
 import {PaperUnfoldIn} from '../components/PaperTransitions';
 import {COLORS} from '../timeline';
+import {useLang} from '../i18n';
 
 // voice starts at frame 12. "five thousand" 0.22 s, technology 3.1 s, "acquisition system" 6.2 s, "grow" 9.2 s
 const V = 12;
-const USES = [
-  {label: 'STRONGER TECHNOLOGY', at: V + 90},
-  {label: 'INTERNATIONAL ACQUISITION SYSTEM', at: V + 180},
-  {label: 'MORE BUSINESSES GROWING', at: V + 245},
-];
 const END_CARD_AT = 300;
 
 const EndCard: React.FC = () => {
   const frame = useCurrentFrame();
+  const {t} = useLang();
+  const tagSize = t.tag2.length > 36 ? 36 : 46;
   const {fps} = useVideoConfig();
   const tag = spring({frame: frame - 40, fps, config: {damping: 14}});
   const tag2 = spring({frame: frame - 52, fps, config: {damping: 14}});
@@ -44,19 +42,19 @@ const EndCard: React.FC = () => {
       <AbsoluteFill style={{left: 640, width: 'auto', right: 40, justifyContent: 'center', alignItems: 'center'}}>
         <EchoLogo delay={14} size={200} />
         <div style={{marginTop: 46, textAlign: 'center', fontFamily: 'Archivo Black', letterSpacing: 2, whiteSpace: 'nowrap'}}>
-          <div style={{fontSize: 46, color: COLORS.cream, opacity: tag, transform: `translateY(${(1 - tag) * 30}px)`}}>
-            WE DON&apos;T SELL LIKES.
+          <div style={{fontSize: tagSize, color: COLORS.cream, opacity: tag, transform: `translateY(${(1 - tag) * 30}px)`}}>
+            {t.tag1}
           </div>
           <div
             style={{
-              fontSize: 46,
+              fontSize: tagSize,
               color: COLORS.amber,
               marginTop: 10,
               opacity: tag2,
               transform: `translateY(${(1 - tag2) * 30}px)`,
             }}
           >
-            WE HELP BUSINESSES GET CUSTOMERS.
+            {t.tag2}
           </div>
         </div>
       </AbsoluteFill>
@@ -67,6 +65,12 @@ const EndCard: React.FC = () => {
 
 // 50.5–64 s · Jorge in front of the finished city; $5,000 assembles; end card.
 export const Scene06Investment: React.FC = () => {
+  const {t, at} = useLang();
+  const USES = [
+    {label: t.uses[0], at: at(5, 'use1', V + 90)},
+    {label: t.uses[1], at: at(5, 'use2', V + 180)},
+    {label: t.uses[2], at: at(5, 'use3', V + 245)},
+  ];
   return (
     <AbsoluteFill style={{background: COLORS.ink}}>
       <CameraMovement from={{scale: 1.18, x: 0, y: 70}} to={{scale: 1.06, x: 0, y: 20}} durationInFrames={END_CARD_AT}>

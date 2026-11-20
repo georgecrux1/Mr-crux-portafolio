@@ -6,20 +6,22 @@ import {LightingAndShadows} from '../components/LightingAndShadows';
 import {SceneImage} from '../components/SceneImage';
 import {PaperTag} from '../components/PaperTypography';
 import {COLORS} from '../timeline';
+import {useLang} from '../i18n';
 
 // voice starts at frame 30. Word times (s): advertising 4.62, creative 5.72, automation 6.87
 const V = 30;
-const MODULES = [
-  {n: '01', label: 'DIGITAL ADVERTISING', at: V + 136, color: COLORS.burgundy},
-  {n: '02', label: 'CREATIVE CONTENT', at: V + 172, color: COLORS.teal},
-  {n: '03', label: 'MARKETING AUTOMATION', at: V + 206, color: COLORS.amber},
-];
-const LINK_AT = V + 232;
 const LOGO_AT = V + 250;
 
 // 30–41 s · Jorge pulls the lever: three paper modules unfold and lock into one system.
 export const Scene04Solution: React.FC = () => {
   const frame = useCurrentFrame();
+  const {t, at} = useLang();
+  const MODULES = [
+    {n: '01', label: t.modules[0], at: at(3, 'mod1', V + 136), color: COLORS.burgundy},
+    {n: '02', label: t.modules[1], at: at(3, 'mod2', V + 172), color: COLORS.teal},
+    {n: '03', label: t.modules[2], at: at(3, 'mod3', V + 206), color: COLORS.amber},
+  ];
+  const LINK_AT = Math.min(MODULES[2].at + 26, LOGO_AT - 18);
   const power = interpolate(frame, [12, 40], [0.62, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   const link = interpolate(frame, [LINK_AT, LINK_AT + 20], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   const logoBg = interpolate(frame, [LOGO_AT - 6, LOGO_AT + 10], [0, 0.72], {
@@ -45,14 +47,14 @@ export const Scene04Solution: React.FC = () => {
           opacity={0.8}
         />
       </svg>
-      <div style={{position: 'absolute', top: 120, left: 0, right: 0, display: 'flex', justifyContent: 'space-around', padding: '0 60px'}}>
+      <div style={{position: 'absolute', top: 120, left: 0, right: 0, display: 'flex', justifyContent: 'space-around', padding: '0 40px', gap: 16}}>
         {MODULES.map((m, i) => (
           <PaperTag key={m.n} delay={m.at} bg={COLORS.cream} rotate={[-3, 2, -1][i]}>
             <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
               <div
                 style={{
                   fontFamily: 'Archivo Black',
-                  fontSize: 46,
+                  fontSize: 40,
                   color: COLORS.cream,
                   background: m.color,
                   borderRadius: 6,
@@ -61,7 +63,7 @@ export const Scene04Solution: React.FC = () => {
               >
                 {m.n}
               </div>
-              <div style={{fontFamily: 'Archivo Black', fontSize: 30, color: COLORS.ink, letterSpacing: 1, whiteSpace: 'nowrap'}}>{m.label}</div>
+              <div style={{fontFamily: 'Archivo Black', fontSize: m.label.length > 20 ? 25 : 30, color: COLORS.ink, letterSpacing: 1, whiteSpace: 'nowrap'}}>{m.label}</div>
             </div>
           </PaperTag>
         ))}
@@ -81,7 +83,7 @@ export const Scene04Solution: React.FC = () => {
               opacity: interpolate(frame, [LOGO_AT + 30, LOGO_AT + 45], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
             }}
           >
-            ONE CUSTOMER ACQUISITION SYSTEM
+            {t.oneSystem}
           </div>
         </AbsoluteFill>
       ) : null}

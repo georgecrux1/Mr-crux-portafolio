@@ -5,9 +5,12 @@ import {LightingAndShadows} from '../components/LightingAndShadows';
 import {SceneImage} from '../components/SceneImage';
 import {PaperTag} from '../components/PaperTypography';
 import {COLORS} from '../timeline';
+import {useLang} from '../i18n';
 
 // 10–18 s · A paper door opens and Jorge walks into the miniature city, looking at camera.
-export const Scene02Founder: React.FC = () => (
+export const Scene02Founder: React.FC = () => {
+  const {t} = useLang();
+  return (
   <AbsoluteFill style={{background: COLORS.ink}}>
     <CameraMovement from={{scale: 1.55, x: 60, y: 120}} to={{scale: 1.08, x: 0, y: 0}}>
       <SceneImage src="img/s2-door.png" />
@@ -28,9 +31,10 @@ export const Scene02Founder: React.FC = () => (
             marginTop: 6,
           }}
         >
-          FOUNDER · ECHO LABS
+          {t.founderRole}
         </div>
       </PaperTag>
     </div>
   </AbsoluteFill>
-);
+  );
+};
