@@ -23,9 +23,12 @@ cfg.total = t;
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
-  await page.goto('file://' + path.join(DIR, 'poema.html'));
+  await page.goto('file://' + path.join(DIR, cfg.template || 'poema.html'));
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(c => window.build(c), cfg);
+  await page.evaluate(urls => Promise.all(urls.map(u => { const im = new Image(); im.src = u; return im.decode(); })),
+    cfg.segments.filter(g => g.image).map(g => g.image));
+  await page.waitForTimeout(300);
   if (previewArg) {
     for (const ms of previewArg.split(',').map(Number)) { await page.evaluate(m => window.seek(m), ms); await page.screenshot({ path: `${outPath}_${ms}.png` }); }
     console.log(cfg.segments.map(g => `${g.type}@${g.start}+${g.dur}`).join(' '), 'total', t); await browser.close(); return;
