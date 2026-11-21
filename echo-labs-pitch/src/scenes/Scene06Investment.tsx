@@ -84,7 +84,7 @@ export const Scene06Investment: React.FC = () => {
   return (
     <AbsoluteFill style={{background: COLORS.ink}}>
       <CameraMovement from={{scale: 1.18, x: 0, y: 70}} to={{scale: 1.06, x: 0, y: 20}} durationInFrames={END_CARD_AT}>
-        <SceneImage src={portrait ? 'img/v6-hero.png' : 'img/s6-hero.png'} video={portrait ? 'video/mv6-hero.mp4' : undefined} clipSecs={12} spanFrames={END_CARD_AT} />
+        <SceneImage src={portrait ? 'img/v6-hero.jpg' : 'img/s6-hero.png'} video={portrait ? 'video/mv6-hero.mp4' : undefined} clipSecs={12} spanFrames={END_CARD_AT} />
       </CameraMovement>
       <LightingAndShadows warmth={0.32} vignette={0.45} lightX={50} lightY={10} />
       <div style={{position: 'absolute', top: portrait ? 130 : 70, left: 0, right: 0}}>

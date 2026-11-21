@@ -14,7 +14,7 @@ export const Scene01Problem: React.FC = () => {
   return (
   <AbsoluteFill style={{background: COLORS.tealDark}}>
     <CameraMovement from={{scale: 1.04, x: 60, y: 10}} to={{scale: 1.22, x: -40, y: 30}}>
-      <SceneImage src={portrait ? 'img/v1-city.png' : 'img/s1-city.png'} video={portrait ? 'video/mv1-city.mp4' : undefined} clipSecs={12} brightness={0.92} />
+      <SceneImage src={portrait ? 'img/v1-city.jpg' : 'img/s1-city.png'} video={portrait ? 'video/mv1-city.mp4' : undefined} clipSecs={12} brightness={0.92} />
     </CameraMovement>
     {/* near paper skyline sliding faster than the set => parallax depth */}
     <PaperCity

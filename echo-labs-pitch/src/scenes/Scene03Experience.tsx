@@ -54,7 +54,7 @@ export const Scene03Experience: React.FC = () => {
   return (
     <AbsoluteFill style={{background: COLORS.paper}}>
       <CameraMovement from={portrait ? {scale: 1.04, x: 0, y: 60} : {scale: 1.12, x: 120, y: 40}} to={portrait ? {scale: 1.14, x: -30, y: 20} : {scale: 1.2, x: -110, y: 10}}>
-        <SceneImage src={portrait ? 'img/v3-studio.png' : 'img/s3-studio.png'} video={portrait ? 'video/mv3-studio.mp4' : undefined} clipSecs={15} />
+        <SceneImage src={portrait ? 'img/v3-studio.jpg' : 'img/s3-studio.png'} video={portrait ? 'video/mv3-studio.mp4' : undefined} clipSecs={15} />
       </CameraMovement>
       {bubbles.map((b, i) => (
         <ChatBubble key={i} {...b} />
