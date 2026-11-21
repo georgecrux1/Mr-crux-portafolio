@@ -17,10 +17,10 @@ export type SceneDef = {
   voFrames: number; // length of voiceover clip
 };
 
-// Voiceover lengths in frames (ffprobe seconds * 30, rounded up) — voice "George".
+// Voiceover lengths in frames (ffprobe seconds * 30, rounded up) — voice "Voz gruesa Jorge" (YXAI7CSvIsaQpUusOC9o).
 const VO_FRAMES: Record<Lang, number[]> = {
-  en: [232, 227, 441, 292, 278, 287],
-  es: [280, 240, 359, 304, 270, 337],
+  en: [247, 222, 369, 251, 326, 294],
+  es: [285, 196, 342, 294, 304, 333],
 };
 
 const BASE = [

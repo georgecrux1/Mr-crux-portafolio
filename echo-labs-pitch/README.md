@@ -28,8 +28,8 @@ npx remotion still CharacterModelSheet out/character-model-sheet.png
 | 05 | Vision | 41–50.5 s | Paper globe, threads LatAm → Europe | STARTING IN LATIN AMERICA → EUROPE & BEYOND |
 | 06 | Investment | 50.5–64 s | Hero shot, $5,000 assembles, torn-paper end card | $5,000 · uses · tagline |
 
-Narration was trimmed (scenes 2–3) so it fits at natural speed. The voice is always ElevenLabs "George"
-(voice_id `n2tl9YFrwkD0zJ8XCm2z`), Jorge's own voice — see `/CLAUDE.md`. Scene lengths are derived
+Narration was trimmed (scenes 2–3) so it fits at natural speed. The voice is always ElevenLabs "Voz gruesa Jorge"
+(voice_id `YXAI7CSvIsaQpUusOC9o`), Jorge's own voice — see `/CLAUDE.md`. Scene lengths are derived
 from each voiceover's real duration (`buildTimeline` in `src/timeline.ts`). Subtitles use word-level timestamps from transcribing the narration
 (`src/captions/*.json`).
 
