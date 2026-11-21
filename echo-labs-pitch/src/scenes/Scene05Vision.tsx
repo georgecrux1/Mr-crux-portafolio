@@ -35,7 +35,7 @@ export const Scene05Vision: React.FC = () => {
   return (
     <AbsoluteFill style={{background: COLORS.tealDark}}>
       <CameraMovement from={portrait ? {scale: 1.25, x: 0, y: 120, rotate: -2} : {scale: 1.3, x: 160, y: -40, rotate: -2}} to={{scale: 1.04, x: 0, y: 0, rotate: 0}}>
-        <SceneImage src={portrait ? 'img/v5-world.png' : 'img/s5-world.png'} />
+        <SceneImage src={portrait ? 'img/v5-world.png' : 'img/s5-world.png'} video={portrait ? 'video/mv5-world.mp4' : undefined} clipSecs={11} />
         <svg width={portrait ? 1080 : 1920} height={portrait ? 1920 : 1080} style={{position: 'absolute', inset: 0}}>
           {arcs.map((a, i) => {
             const p = interpolate(frame, [a.delay, a.delay + 45], [0, 1], {
