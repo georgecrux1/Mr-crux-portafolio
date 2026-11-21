@@ -30,7 +30,7 @@ export const Scene04Solution: React.FC = () => {
   });
   return (
     <AbsoluteFill style={{background: COLORS.paper}}>
-      <CameraMovement from={portrait ? {scale: 1.04, x: 0, y: 0} : {scale: 1.08, x: 40, y: 30}} to={portrait ? {scale: 1.12, x: 20, y: -30} : {scale: 1.2, x: 60, y: 60}}>
+      <CameraMovement from={portrait ? {scale: 1.0, x: 0, y: 0} : {scale: 1.08, x: 40, y: 30}} to={portrait ? {scale: 1.03, x: -20, y: 0} : {scale: 1.2, x: 60, y: 60}}>
         <SceneImage src={portrait ? 'img/v4-machine.jpg' : 'img/s4-machine.png'} video={portrait ? 'video/mv4-machine.mp4' : undefined} clipSecs={14} brightness={power} blur={logoBg * 6} />
       </CameraMovement>
       <LightingAndShadows warmth={0.15 + 0.2 * power} vignette={0.45} lightX={35} lightY={70} />

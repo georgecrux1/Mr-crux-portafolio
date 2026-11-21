@@ -103,7 +103,7 @@ export const Scene03Experience: React.FC = () => {
           {t.oneCampaign}
         </div>
       </div>
-      <div style={{position: 'absolute', left: portrait ? 60 : 90, top: portrait ? 560 : 80}}>
+      <div style={{position: 'absolute', left: portrait ? 60 : 90, top: portrait ? 660 : 80}}>
         <PaperTag delay={LEADS_AT} bg={COLORS.ink} rotate={-3}>
           <div style={{fontFamily: 'Archivo Black', fontSize: 40, color: COLORS.cream, letterSpacing: 2}}>
             {t.leadsNot[0]} <span style={{color: COLORS.amber}}>≠</span> {t.leadsNot[1]}
