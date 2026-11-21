@@ -9,16 +9,16 @@ import {useLang} from '../i18n';
 
 // 10–18 s · A paper door opens and Jorge walks into the miniature city, looking at camera.
 export const Scene02Founder: React.FC = () => {
-  const {t} = useLang();
+  const {t, portrait} = useLang();
   return (
   <AbsoluteFill style={{background: COLORS.ink}}>
-    <CameraMovement from={{scale: 1.55, x: 60, y: 120}} to={{scale: 1.08, x: 0, y: 0}}>
-      <SceneImage src="img/s2-door.png" />
+    <CameraMovement from={portrait ? {scale: 1.5, x: -40, y: 80} : {scale: 1.55, x: 60, y: 120}} to={{scale: 1.08, x: 0, y: 0}}>
+      <SceneImage src={portrait ? 'img/v2-door.png' : 'img/s2-door.png'} />
     </CameraMovement>
     <LightingAndShadows warmth={0.3} vignette={0.5} lightX={45} lightY={40} />
-    <div style={{position: 'absolute', right: 110, bottom: 210}}>
+    <div style={portrait ? {position: 'absolute', left: 0, right: 0, top: 170, display: 'flex', justifyContent: 'center'} : {position: 'absolute', right: 110, bottom: 210}}>
       <PaperTag delay={30} rotate={-2}>
-        <div style={{fontFamily: 'Archivo Black', fontSize: 50, color: COLORS.ink, letterSpacing: 1}}>
+        <div style={{fontFamily: 'Archivo Black', fontSize: portrait ? 44 : 50, color: COLORS.ink, letterSpacing: 1}}>
           JORGE AMOROCHO CRUZ
         </div>
         <div

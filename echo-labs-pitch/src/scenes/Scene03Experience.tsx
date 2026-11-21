@@ -40,21 +40,21 @@ const ChatBubble: React.FC<{x: number; y: number; delay: number; w: number}> = (
 export const Scene03Experience: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const {t, at} = useLang();
+  const {t, at, portrait} = useLang();
   const NUM_AT = at(2, 'number', 91);
   const LEADS_AT = at(2, 'leads', 179);
   const n = useCount(0, 237, NUM_AT - 8, 40);
   const numPop = spring({frame: frame - (NUM_AT - 10), fps, config: {damping: 9, stiffness: 120}});
   const bubbles = Array.from({length: 14}, (_, i) => ({
-    x: 1300 + ((i * 97) % 380),
-    y: 640 - ((i * 53) % 260),
+    x: portrait ? 620 + ((i * 97) % 300) : 1300 + ((i * 97) % 380),
+    y: portrait ? 1200 - ((i * 53) % 300) : 640 - ((i * 53) % 260),
     delay: NUM_AT - 6 + i * 3,
     w: 110 + ((i * 37) % 80),
   }));
   return (
     <AbsoluteFill style={{background: COLORS.paper}}>
-      <CameraMovement from={{scale: 1.12, x: 120, y: 40}} to={{scale: 1.2, x: -110, y: 10}}>
-        <SceneImage src="img/s3-studio.png" />
+      <CameraMovement from={portrait ? {scale: 1.04, x: 0, y: 60} : {scale: 1.12, x: 120, y: 40}} to={portrait ? {scale: 1.14, x: -30, y: 20} : {scale: 1.2, x: -110, y: 10}}>
+        <SceneImage src={portrait ? 'img/v3-studio.png' : 'img/s3-studio.png'} />
       </CameraMovement>
       {bubbles.map((b, i) => (
         <ChatBubble key={i} {...b} />
@@ -63,8 +63,8 @@ export const Scene03Experience: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          right: 90,
-          top: 60,
+          right: portrait ? 60 : 90,
+          top: portrait ? 120 : 60,
           textAlign: 'right',
           transform: `scale(${0.6 + 0.4 * numPop}) rotate(${(1 - numPop) * 8}deg)`,
           transformOrigin: '100% 0%',
@@ -74,7 +74,7 @@ export const Scene03Experience: React.FC = () => {
         <div
           style={{
             fontFamily: 'Archivo Black',
-            fontSize: 250,
+            fontSize: portrait ? 230 : 250,
             lineHeight: 0.9,
             color: COLORS.burgundy,
             textShadow:
@@ -90,7 +90,7 @@ export const Scene03Experience: React.FC = () => {
             background: COLORS.green,
             color: '#fff',
             fontFamily: 'Archivo Black',
-            fontSize: 42,
+            fontSize: portrait ? 36 : 42,
             letterSpacing: 3,
             padding: '10px 22px',
             borderRadius: 6,
@@ -103,7 +103,7 @@ export const Scene03Experience: React.FC = () => {
           {t.oneCampaign}
         </div>
       </div>
-      <div style={{position: 'absolute', left: 90, top: 80}}>
+      <div style={{position: 'absolute', left: portrait ? 60 : 90, top: portrait ? 560 : 80}}>
         <PaperTag delay={LEADS_AT} bg={COLORS.ink} rotate={-3}>
           <div style={{fontFamily: 'Archivo Black', fontSize: 40, color: COLORS.cream, letterSpacing: 2}}>
             {t.leadsNot[0]} <span style={{color: COLORS.amber}}>≠</span> {t.leadsNot[1]}

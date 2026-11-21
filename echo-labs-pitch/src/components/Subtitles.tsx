@@ -39,7 +39,7 @@ const toLines = (words: Word[]) => {
  */
 export const Subtitles: React.FC<{words: Word[]; offset: number}> = ({words, offset}) => {
   const frame = useCurrentFrame();
-  const {lang} = useLang();
+  const {lang, portrait} = useLang();
   const t = (frame - offset) / FPS;
   const lines = toLines(normalise(words, NUMBER_REWRITES[lang]));
   const line = lines.find((l, i) => {
@@ -57,7 +57,7 @@ export const Subtitles: React.FC<{words: Word[]; offset: number}> = ({words, off
         position: 'absolute',
         left: 0,
         right: 0,
-        bottom: 70,
+        bottom: portrait ? 300 : 70,
         display: 'flex',
         justifyContent: 'center',
         opacity: appear,
@@ -72,10 +72,10 @@ export const Subtitles: React.FC<{words: Word[]; offset: number}> = ({words, off
           boxShadow: '0 2px 0 #b9a888, 0 3px 0 #a49373, 0 12px 24px rgba(0,0,0,0.35)',
           fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
           fontWeight: 700,
-          fontSize: 42,
+          fontSize: portrait ? 46 : 42,
           letterSpacing: 0.2,
           color: '#2A221D',
-          maxWidth: 1500,
+          maxWidth: portrait ? 960 : 1500,
           textAlign: 'center',
         }}
       >

@@ -12,6 +12,8 @@ npm install
 npm run studio                       # live preview / edit
 npx remotion render EchoLabsPitch out/echo-labs-pitch.mp4 --crf=18      # English
 npx remotion render EchoLabsPitchES out/echo-labs-pitch-es.mp4 --crf=18 # Español
+npx remotion render EchoLabsPitchVertical out/echo-labs-pitch-vertical-en.mp4 --crf=18   # 9:16 English
+npx remotion render EchoLabsPitchVerticalES out/echo-labs-pitch-vertical-es.mp4 --crf=18 # 9:16 Español
 npx remotion still CharacterModelSheet out/character-model-sheet.png
 ```
 
@@ -26,9 +28,16 @@ npx remotion still CharacterModelSheet out/character-model-sheet.png
 | 05 | Vision | 41–50.5 s | Paper globe, threads LatAm → Europe | STARTING IN LATIN AMERICA → EUROPE & BEYOND |
 | 06 | Investment | 50.5–64 s | Hero shot, $5,000 assembles, torn-paper end card | $5,000 · uses · tagline |
 
-Narration was trimmed (scenes 2–3) so it fits at natural speed. The voice is "George cruz"
-(ElevenLabs). Subtitles use word-level timestamps from transcribing the narration
+Narration was trimmed (scenes 2–3) so it fits at natural speed. The voice is always ElevenLabs "George"
+(voice_id `n2tl9YFrwkD0zJ8XCm2z`), Jorge's own voice — see `/CLAUDE.md`. Scene lengths are derived
+from each voiceover's real duration (`buildTimeline` in `src/timeline.ts`). Subtitles use word-level timestamps from transcribing the narration
 (`src/captions/*.json`).
+
+## Formats
+
+Every composition takes `format: 'landscape' | 'portrait'`. Portrait (1080×1920) uses
+separately generated 9:16 sets (`public/img/v*.png`) and its own layouts for tags, cards,
+subtitles and the end card.
 
 ## Languages
 

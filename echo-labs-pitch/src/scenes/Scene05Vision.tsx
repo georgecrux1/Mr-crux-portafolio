@@ -9,6 +9,14 @@ import {useLang} from '../i18n';
 
 // voice starts at frame 14. "Latin America" ≈ 4.76 s, "internationally" ≈ 6.45 s
 
+const ARCS_V = [
+  {d: 'M 430 1420 Q 300 1000 760 860', delay: 40},
+  {d: 'M 470 1520 Q 760 1100 880 760', delay: 70},
+  {d: 'M 380 1300 Q 500 1000 640 820', delay: 100},
+  {d: 'M 520 1600 Q 980 1300 960 980', delay: 130},
+  {d: 'M 760 860 Q 900 600 1000 700', delay: 170},
+];
+
 const ARCS = [
   {d: 'M 520 700 Q 820 380 1180 520', delay: 40},
   {d: 'M 560 760 Q 980 330 1420 600', delay: 70},
@@ -20,15 +28,16 @@ const ARCS = [
 // 41–51 s · The city becomes a paper world; threads connect Latin America, Europe and beyond.
 export const Scene05Vision: React.FC = () => {
   const frame = useCurrentFrame();
-  const {t, at} = useLang();
+  const {t, at, portrait} = useLang();
+  const arcs = portrait ? ARCS_V : ARCS;
   const LATAM_AT = at(4, 'latam', 154);
   const INTL_AT = at(4, 'intl', 206);
   return (
     <AbsoluteFill style={{background: COLORS.tealDark}}>
-      <CameraMovement from={{scale: 1.3, x: 160, y: -40, rotate: -2}} to={{scale: 1.04, x: 0, y: 0, rotate: 0}}>
-        <SceneImage src="img/s5-world.png" />
-        <svg width={1920} height={1080} style={{position: 'absolute', inset: 0}}>
-          {ARCS.map((a, i) => {
+      <CameraMovement from={portrait ? {scale: 1.25, x: 0, y: 120, rotate: -2} : {scale: 1.3, x: 160, y: -40, rotate: -2}} to={{scale: 1.04, x: 0, y: 0, rotate: 0}}>
+        <SceneImage src={portrait ? 'img/v5-world.png' : 'img/s5-world.png'} />
+        <svg width={portrait ? 1080 : 1920} height={portrait ? 1920 : 1080} style={{position: 'absolute', inset: 0}}>
+          {arcs.map((a, i) => {
             const p = interpolate(frame, [a.delay, a.delay + 45], [0, 1], {
               extrapolateLeft: 'clamp',
               extrapolateRight: 'clamp',
@@ -64,14 +73,14 @@ export const Scene05Vision: React.FC = () => {
         </svg>
       </CameraMovement>
       <LightingAndShadows warmth={0.3} vignette={0.5} lightX={60} lightY={20} />
-      <div style={{position: 'absolute', left: 110, top: 100}}>
+      <div style={{position: 'absolute', left: portrait ? 50 : 110, top: portrait ? 150 : 100}}>
         <PaperTag delay={LATAM_AT} bg={COLORS.burgundy} rotate={-3}>
           <div style={{fontFamily: 'Archivo Black', fontSize: 40, color: COLORS.cream, letterSpacing: 2}}>
             {t.latam}
           </div>
         </PaperTag>
       </div>
-      <div style={{position: 'absolute', right: 110, top: 200}}>
+      <div style={{position: 'absolute', right: portrait ? 50 : 110, top: portrait ? 290 : 200}}>
         <PaperTag delay={INTL_AT} bg={COLORS.cream} rotate={3}>
           <div style={{fontFamily: 'Archivo Black', fontSize: 40, color: COLORS.teal, letterSpacing: 2}}>
             {t.beyond}

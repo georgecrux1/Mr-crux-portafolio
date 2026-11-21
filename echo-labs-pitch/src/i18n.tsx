@@ -11,9 +11,9 @@ import es3 from './captions/es-vo3.json';
 import es4 from './captions/es-vo4.json';
 import es5 from './captions/es-vo5.json';
 import es6 from './captions/es-vo6.json';
-import {FPS, SCENES} from './timeline';
+import {buildTimeline, DIMENSIONS, Format, FPS, Lang, VO_OFFSETS} from './timeline';
 
-export type Lang = 'en' | 'es';
+export type {Lang, Format};
 export type Word = {text: string; start: number; end: number};
 
 const WORDS: Record<Lang, Word[][]> = {
@@ -82,20 +82,32 @@ const ANCHORS: Record<string, Record<Lang, string>> = {
   use3: {en: 'help', es: 'ayudaré'},
 };
 
-type Ctx = {lang: Lang; t: (typeof STRINGS)['en']; words: (scene: number) => Word[]; at: (scene: number, key: string, fallback: number) => number};
+type Ctx = {
+  lang: Lang;
+  format: Format;
+  portrait: boolean;
+  W: number;
+  H: number;
+  timeline: ReturnType<typeof buildTimeline>;
+  t: (typeof STRINGS)['en']; words: (scene: number) => Word[]; at: (scene: number, key: string, fallback: number) => number};
 
 const LangContext = createContext<Ctx | null>(null);
 
-export const LangProvider: React.FC<{lang: Lang; children: React.ReactNode}> = ({lang, children}) => {
+export const LangProvider: React.FC<{lang: Lang; format?: Format; children: React.ReactNode}> = ({lang, format = 'landscape', children}) => {
   const value: Ctx = {
     lang,
+    format,
+    portrait: format === 'portrait',
+    W: DIMENSIONS[format].width,
+    H: DIMENSIONS[format].height,
+    timeline: buildTimeline(lang),
     t: STRINGS[lang],
     words: (scene) => WORDS[lang][scene],
     // scene-local frame at which the anchor word starts being spoken
     at: (scene, key, fallback) => {
       const target = ANCHORS[key]?.[lang]?.toLowerCase();
       const w = WORDS[lang][scene].find((x) => x.text.toLowerCase() === target);
-      return w ? SCENES[scene].voOffset + Math.round(w.start * FPS) : fallback;
+      return w ? VO_OFFSETS[scene] + Math.round(w.start * FPS) : fallback;
     },
   };
   return <LangContext.Provider value={value}>{children}</LangContext.Provider>;

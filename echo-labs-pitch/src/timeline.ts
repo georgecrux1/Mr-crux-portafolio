@@ -1,77 +1,55 @@
 export const FPS = 30;
-export const WIDTH = 1920;
-export const HEIGHT = 1080;
 export const TRANSITION = 18; // frames of overlap between scenes
+
+export type Lang = 'en' | 'es';
+export type Format = 'landscape' | 'portrait';
+
+export const DIMENSIONS: Record<Format, {width: number; height: number}> = {
+  landscape: {width: 1920, height: 1080},
+  portrait: {width: 1080, height: 1920},
+};
 
 export type SceneDef = {
   id: string;
   from: number; // start frame
   duration: number; // frames (excluding outgoing overlap)
-  vo: string; // voiceover file in /public/audio
   voOffset: number; // frames after scene start
   voFrames: number; // length of voiceover clip
-  text: string; // exact narration (subtitles)
 };
 
-// Voiceover durations measured with ffprobe (seconds * 30).
-export const SCENES: SceneDef[] = [
-  {
-    id: 'problem',
-    from: 0,
-    duration: 300,
-    vo: 'audio/vo1.mp3',
-    voOffset: 24,
-    voFrames: 203,
-    text: "Small businesses don't fail because they lack good products. Many fail because they can't consistently find customers.",
-  },
-  {
-    id: 'founder',
-    from: 300,
-    duration: 240,
-    vo: 'audio/vo2.mp3',
-    voOffset: 14,
-    voFrames: 217,
-    text: "I'm Jorge, founder of Echo Labs. After years in digital advertising and marketing, I've seen this problem firsthand.",
-  },
-  {
-    id: 'experience',
-    from: 540,
-    duration: 360,
-    vo: 'audio/vo3.mp3',
-    voOffset: 16,
-    voFrames: 323,
-    text: "I've run real campaigns. One generated 237 WhatsApp enquiries. But leads aren't enough. Businesses need a system that turns them into customers.",
-  },
-  {
-    id: 'solution',
-    from: 900,
-    duration: 330,
-    vo: 'audio/vo4.mp3',
-    voOffset: 30,
-    voFrames: 229,
-    text: "That's why I'm building Echo Labs: a customer acquisition service combining digital advertising, creative content and automation.",
-  },
-  {
-    id: 'vision',
-    from: 1230,
-    duration: 285,
-    vo: 'audio/vo5.mp3',
-    voOffset: 14,
-    voFrames: 222,
-    text: 'My vision is to make professional marketing accessible to small businesses, starting in Latin America and expanding internationally.',
-  },
-  {
-    id: 'investment',
-    from: 1515,
-    duration: 405,
-    vo: 'audio/vo6.mp3',
-    voOffset: 12,
-    voFrames: 289,
-    text: "With five thousand dollars, I'll strengthen our technology, build our international client acquisition system, and help more businesses grow.",
-  },
-];
+// Voiceover lengths in frames (ffprobe seconds * 30, rounded up) — voice "George".
+const VO_FRAMES: Record<Lang, number[]> = {
+  en: [232, 227, 441, 292, 278, 287],
+  es: [280, 240, 359, 304, 270, 337],
+};
 
-export const TOTAL_FRAMES = 1920; // 64 s
+const BASE = [
+  {id: 'problem', min: 300, voOffset: 24, pad: 20},
+  {id: 'founder', min: 240, voOffset: 14, pad: 20},
+  {id: 'experience', min: 360, voOffset: 16, pad: 24},
+  {id: 'solution', min: 330, voOffset: 30, pad: 75}, // room for the logo reveal after narration
+  {id: 'vision', min: 285, voOffset: 14, pad: 20},
+  {id: 'investment', min: 0, voOffset: 12, pad: 0},
+];
+export const END_CARD_FRAMES = 105;
+
+export const VO_OFFSETS = BASE.map((b) => b.voOffset);
+
+/** Scene timing derived from the real voiceover length, so nothing is ever cut. */
+export const buildTimeline = (lang: Lang) => {
+  let from = 0;
+  const scenes: SceneDef[] = BASE.map((b, i) => {
+    const voFrames = VO_FRAMES[lang][i];
+    const last = i === BASE.length - 1;
+    const endCardAt = Math.max(300, b.voOffset + voFrames + 10);
+    const duration = last ? endCardAt + END_CARD_FRAMES : Math.max(b.min, b.voOffset + voFrames + b.pad);
+    const s = {id: b.id, from, duration, voOffset: b.voOffset, voFrames};
+    from += duration;
+    return s;
+  });
+  const last = scenes[scenes.length - 1];
+  return {scenes, total: from, endCardAt: last.duration - END_CARD_FRAMES};
+};
 
 export const COLORS = {
   cream: '#F3E9D8',

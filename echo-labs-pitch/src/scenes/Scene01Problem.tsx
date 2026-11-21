@@ -10,11 +10,11 @@ import {useLang} from '../i18n';
 
 // 0–10 s · An empty miniature paper street. Shop owners wait for customers who never come.
 export const Scene01Problem: React.FC = () => {
-  const {t} = useLang();
+  const {t, portrait} = useLang();
   return (
   <AbsoluteFill style={{background: COLORS.tealDark}}>
     <CameraMovement from={{scale: 1.04, x: 60, y: 10}} to={{scale: 1.22, x: -40, y: 30}}>
-      <SceneImage src="img/s1-city.png" brightness={0.92} />
+      <SceneImage src={portrait ? 'img/v1-city.png' : 'img/s1-city.png'} brightness={0.92} />
     </CameraMovement>
     {/* near paper skyline sliding faster than the set => parallax depth */}
     <PaperCity
@@ -27,14 +27,14 @@ export const Scene01Problem: React.FC = () => {
       ]}
     />
     <LightingAndShadows warmth={0.18} vignette={0.62} lightX={70} lightY={25} />
-    <div style={{position: 'absolute', left: 90, top: 80}}>
+    <div style={{position: 'absolute', left: portrait ? 60 : 90, top: portrait ? 150 : 80}}>
       <PaperTag delay={10} bg={COLORS.cream} rotate={-3}>
         <div style={{fontFamily: 'Archivo Black', fontSize: 34, color: COLORS.burgundy, letterSpacing: 3}}>
           {t.problem}
         </div>
       </PaperTag>
     </div>
-    <div style={{position: 'absolute', right: 110, top: 90}}>
+    <div style={{position: 'absolute', right: portrait ? 50 : 110, top: portrait ? 280 : 90}}>
       <PaperTag delay={120} bg={COLORS.burgundy} rotate={4}>
         <div style={{fontFamily: 'Archivo Black', fontSize: 40, color: COLORS.cream, letterSpacing: 2}}>
           {t.whereCustomers}

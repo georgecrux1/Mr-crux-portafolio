@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Easing, interpolate, random, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Easing, interpolate, random, useCurrentFrame, useVideoConfig} from 'remotion';
 import {TRANSITION} from '../timeline';
 
 /** Jagged torn-paper edge as an SVG path, deterministic per seed. */
@@ -26,6 +26,7 @@ export const PaperUnfoldIn: React.FC<{children: React.ReactNode; seed: string; m
   mode = 'fold',
 }) => {
   const frame = useCurrentFrame();
+  const {width, height} = useVideoConfig();
   const p = interpolate(frame, [0, TRANSITION], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
@@ -39,7 +40,7 @@ export const PaperUnfoldIn: React.FC<{children: React.ReactNode; seed: string; m
         <svg width={0} height={0} style={{position: 'absolute'}}>
           <defs>
             <clipPath id={id}>
-              <polygon points={tornEdge(seed, 1920, 1080, p)} />
+              <polygon points={tornEdge(seed, width, height, p)} />
             </clipPath>
           </defs>
         </svg>
