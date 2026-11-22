@@ -18,3 +18,9 @@ Formato: fecha — tema — link
 - Teoría: el bote de Michael (Marquis) frente a la casa de Jason, GPS con Los Santos — fuente: GameRant
 - Sin rumores: el parche del 25 de nov no está confirmado por Rockstar — fuentes: trackers de bugs
 - Según jugadores: referencia al misterio del Monte Chiliad — fuente: Geek Slop
+
+## 2026-11-22 (voz gratuita Piper; ElevenLabs con 70 créditos)
+- Oficial: récord de US$3.790 M el primer día y 32,5 M en preventa (cifra de Rockstar; Sensor Tower estima menos) — fuentes: Fox Business, Yahoo Finance
+- Huevo de pascua: radio secreta presentada por Kodak Black (4 carteles en La Perle y Crosstown) — fuente: Vice
+- Según jugadores: NPC de Belville que cree que vive en un juego — fuente: LADbible
+- Rumor sin confirmar: un kraken en el fondo del mar — fuente: GameRiv
