@@ -24,3 +24,9 @@ Formato: fecha — tema — link
 - Huevo de pascua: radio secreta presentada por Kodak Black (4 carteles en La Perle y Crosstown) — fuente: Vice
 - Según jugadores: NPC de Belville que cree que vive en un juego — fuente: LADbible
 - Rumor sin confirmar: un kraken en el fondo del mar — fuente: GameRiv
+
+## 2026-11-23 (voz gratuita Piper; ElevenLabs con 70 créditos)
+- Oficial: parche 1.002.002 (~603 MB en PS5, ~1,6 GB en Xbox): arregla cierres, autoguardado y clima — fuentes: Push Square, PlayStation LifeStyle
+- Error viral corregido: la llamada que bloqueaba la historia — fuente: Vice
+- Según jugadores: tritón en una playa cerca de Key Lento — fuente: GameSpot (lista de easter eggs)
+- Encuesta: ¿PC u Online primero? (sin anuncio oficial) — fuente: GameRant
