@@ -1,14 +1,14 @@
 # Storyboard: 28 escenas (vertical 9:16)
 
 Referencias:
-- personaje (adjuntar en la sesión): identidad (cara, gorro vino, gafas, barba, camiseta oscura, pantalón oliva).
-- estilo ciudad (adjuntar en la sesión): estilo gráfico.
+- personaje (adjuntar en la sesión): hoja de personaje con tirantes (foto real). Solo identidad y ropa.
+- calle otoñal con cafetería (adjuntar en la sesión): paleta, luz y ambiente de ciudad.
 
 Modo: image-to-image con ambas referencias · 9:16 · 2K · 1 imagen por escena · sin texto.
 
 ## Prefijo (va antes de cada escena)
 
-> Vertical 9:16 painterly illustration, soft brushstrokes, warm colors, nostalgic mood, tall city buildings, art style like the city reference image. The man must be EXACTLY the character from the character-sheet reference: same face, short beard, black thick-rimmed glasses, burgundy beanie with small skull patch, dark charcoal t-shirt, olive green pants, tan sneakers. No text, no letters, no readable signs anywhere.
+> Vertical 9:16 2D cartoon illustration in a Pixar-inspired style: appealing stylized proportions, big expressive eyes, clean shapes, soft cel shading, warm cinematic lighting. Color palette, light and city atmosphere like the autumn-street reference (orange leaves, blue sky, tall buildings, nostalgic mood). The man must be EXACTLY the character from the character-sheet reference, stylized but recognizable: curly short black hair, light stubble beard, black rectangular glasses, black t-shirt with a vintage skull-with-aviator-goggles graphic, burgundy suspenders, black cargo pants, black-and-white high-top sneakers, black wristwatch. No text, no letters, no readable signs anywhere (the t-shirt graphic has no readable words).
 
 ## Escenas
 
@@ -38,5 +38,5 @@ Modo: image-to-image con ambas referencias · 9:16 · 2K · 1 imagen por escena 
 24. **2:05 Ya no persigo**: the man walks firmly toward the camera down an avenue with a briefcase, not looking back. Grey silhouettes of past conflicts dissolve behind him.
 25. **2:07 Modo guerra**: home office over the skyline, laptop, deep focus. Rising charts, a clock, an organized vision board. Disciplined and calm.
 26. **2:11 Mi mejor versión**: in a gym mirror, he lifts a dumbbell and smiles; his reflection shows a fitter, glowing version of himself.
-27. **2:16 Duermo 8 horas**: the man sleeps peacefully alone in a big cozy bed, glasses and beanie on the nightstand, full moon over the city through the window.
+27. **2:16 Duermo 8 horas**: the man sleeps peacefully alone in a big cozy bed, glasses and wristwatch on the nightstand, full moon over the city through the window.
 28. **2:22 Cierre**: the man on his couch with popcorn, the TV glow on his face. Five small banknotes on one side; a huge pile of restaurant bills and a ring box he pushes away on the other. Satisfied final smile at the viewer.
