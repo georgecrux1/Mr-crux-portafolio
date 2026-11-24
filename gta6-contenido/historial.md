@@ -30,3 +30,9 @@ Formato: fecha — tema — link
 - Error viral corregido: la llamada que bloqueaba la historia — fuente: Vice
 - Según jugadores: tritón en una playa cerca de Key Lento — fuente: GameSpot (lista de easter eggs)
 - Encuesta: ¿PC u Online primero? (sin anuncio oficial) — fuente: GameRant
+
+## 2026-11-24 (voz gratuita Piper; ElevenLabs con 70 créditos)
+- Alerta: el port pirata para PC «Leonida» desapareció; no hay versión oficial para PC — fuentes: PC Games Hardware, GamesRadar
+- Huevo de pascua: gorros de Mario y Luigi en Lummox County — fuentes: Nintendo Life, TweakTown
+- Teoría: el bar Skeeter's (South Park) en el sur de Hamlet — fuente: GameRant
+- Anuncio: cartas oficiales de GTA VI de Panini, sin precio ni fecha — fuente: Yahoo (live updates)
