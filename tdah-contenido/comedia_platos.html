@@ -1,0 +1,195 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Bebas;src:url(fontsource-bebas-neue-5.0.8/files/bebas-neue-latin-400-normal.woff2)}
+@font-face{font-family:Grotesk;src:url(fontsource-space-grotesk-5.0.8/files/space-grotesk-latin-700-normal.woff2);font-weight:700}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#17212C;color:#fff;font-family:Grotesk}
+.scene{position:absolute;inset:0;overflow:hidden;opacity:0}
+.scene svg.bg{position:absolute;inset:0;width:1080px;height:1920px}
+.pill{position:absolute;left:0;right:0;margin:0 auto;width:fit-content;top:200px;font:700 44px Grotesk;letter-spacing:4px;padding:16px 34px;border-radius:60px;white-space:nowrap}
+.big{position:absolute;left:60px;right:60px;text-align:center;font-family:Bebas;line-height:.95;text-transform:uppercase;text-shadow:0 6px 0 #000,0 0 30px rgba(0,0,0,.6)}
+.cap{position:absolute;left:70px;right:70px;text-align:center;font:700 54px/1.2 Grotesk;text-shadow:0 4px 0 #000,0 0 24px rgba(0,0,0,.8)}
+.hl{color:#FFD23F}.red{color:#FF4D4D}.pink{color:#D93A5E}.grn{color:#2ED47A}
+.av{position:absolute;border-radius:50%;overflow:hidden;border:10px solid #F2C14E;box-shadow:0 0 60px rgba(242,193,78,.7)}
+.av img{width:100%;height:100%;display:block}
+#handle{position:absolute;top:110px;left:70px;font:700 34px Grotesk;opacity:.9;z-index:5}#handle span{color:#F2C14E}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:9}
+</style></head><body>
+
+<!-- HOOK -->
+<div class="scene" id="s0">
+ <svg class="bg" viewBox="0 0 1080 1920"><defs><radialGradient id="g0" cx="50%" cy="35%" r="70%"><stop offset="0" stop-color="#5a1036"/><stop offset="1" stop-color="#120a1e"/></radialGradient></defs><rect width="1080" height="1920" fill="url(#g0)"/>
+  <g id="rays" opacity=".18" stroke="#D93A5E" stroke-width="30">
+   <path d="M540 640 L540 -400 M540 640 L1500 100 M540 640 L1500 1200 M540 640 L540 1800 M540 640 L-400 1200 M540 640 L-400 100"/></g></svg>
+ <div class="av" id="av0" style="left:290px;top:390px;width:500px;height:500px"><img src="avatar.jpg"></div>
+ <svg id="anger" viewBox="0 0 120 120" style="position:absolute;left:760px;top:360px;width:150px;height:150px"><path d="M20 50 Q50 45 50 15 M70 15 Q70 45 100 50 M100 70 Q70 75 70 105 M50 105 Q50 75 20 70" stroke="#FF4D4D" stroke-width="12" fill="none" stroke-linecap="round"/></svg>
+ <div class="big" id="h1" style="top:960px;font-size:220px" ><span class="red">OIGAN.</span></div>
+ <div class="cap" id="h2" style="top:1200px">Mucha gente es muy <span class="grn">limpia</span> en su casa…</div>
+ <div class="cap" id="h3" style="top:1350px">…pero en la vida real <span class="red">no lavan ni un plato.</span></div>
+</div>
+
+<!-- ESCENA 1: EL JUEGO -->
+<div class="scene" id="s1">
+ <svg class="bg" viewBox="0 0 1080 1920">
+  <defs><linearGradient id="rgb" x1="0" x2="1"><stop offset="0" stop-color="#D93A5E"/><stop offset=".33" stop-color="#7B2CFF"/><stop offset=".66" stop-color="#F2C14E"/><stop offset="1" stop-color="#FFD23F"/></linearGradient>
+   <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd7a8"/><stop offset="1" stop-color="#ff9ec4"/></linearGradient></defs>
+  <rect width="1080" height="1920" fill="#120c24"/>
+  <rect id="glow" x="60" y="440" width="960" height="640" rx="40" fill="url(#rgb)" opacity=".35" style="filter:blur(60px)"/>
+  <!-- monitor -->
+  <rect x="120" y="480" width="840" height="520" rx="22" fill="#0d0d12" stroke="url(#rgb)" stroke-width="8" id="mon"/>
+  <svg x="145" y="505" width="790" height="470" viewBox="0 0 790 470">
+   <rect width="790" height="470" fill="url(#sky)"/>
+   <g opacity=".35" stroke="#fff" stroke-width="2">
+    <path d="M0 60 H790 M0 120 H790 M0 180 H790 M130 0 V200 M260 0 V200 M390 0 V200 M520 0 V200 M650 0 V200"/></g>
+   <rect x="0" y="200" width="790" height="270" fill="#d9c3a5"/>
+   <rect x="150" y="230" width="420" height="170" rx="18" fill="#b7c3cc" stroke="#8a97a0" stroke-width="6"/>
+   <path d="M360 230 V170 Q360 140 400 140 H430" stroke="#9aa6ae" stroke-width="14" fill="none"/>
+   <g id="plates"><ellipse cx="640" cy="350" rx="80" ry="22" fill="#fff" stroke="#cfd8dc" stroke-width="4"/><ellipse cx="640" cy="330" rx="80" ry="22" fill="#fff" stroke="#cfd8dc" stroke-width="4"/><ellipse cx="640" cy="310" rx="80" ry="22" fill="#fff" stroke="#cfd8dc" stroke-width="4"/><ellipse cx="640" cy="290" rx="80" ry="22" fill="#fff" stroke="#cfd8dc" stroke-width="4"/></g>
+   <ellipse cx="360" cy="320" rx="110" ry="34" fill="#fff" stroke="#cfd8dc" stroke-width="5"/>
+   <g id="sponge"><rect x="300" y="285" width="90" height="46" rx="10" fill="#FFD23F" stroke="#e0a800" stroke-width="5"/><rect x="300" y="285" width="90" height="16" rx="8" fill="#2ED47A"/>
+    <path d="M345 330 Q350 400 380 470 L470 470 Q430 390 410 320 Z" fill="#c68c5a"/></g>
+   <g id="bubbles" fill="#fff" opacity=".9"><circle cx="300" cy="270" r="12"/><circle cx="420" cy="250" r="9"/><circle cx="260" cy="300" r="7"/><circle cx="450" cy="290" r="11"/></g>
+   <g id="spark" fill="#fff"><path d="M560 230 l8 22 22 8 -22 8 -8 22 -8 -22 -22 -8 22 -8z"/><path d="M720 240 l6 16 16 6 -16 6 -6 16 -6 -16 -16 -6 16 -6z"/></g>
+   <circle cx="70" cy="400" r="48" fill="#1a2a1a" stroke="#fff" stroke-width="4" opacity=".85"/><text x="600" y="50" font-family="Grotesk" font-weight="700" font-size="36" fill="#2ED47A">$12,450</text>
+  </svg>
+  <rect x="500" y="1000" width="80" height="120" fill="#222"/><rect x="380" y="1110" width="320" height="24" rx="10" fill="#2a2a33"/>
+  <!-- desk + rgb strip -->
+  <rect x="0" y="1130" width="1080" height="40" fill="#1d1830"/><rect x="0" y="1166" width="1080" height="14" fill="url(#rgb)" id="strip"/>
+  <rect x="220" y="1100" width="460" height="40" rx="8" fill="#1b1b24" stroke="url(#rgb)" stroke-width="3"/>
+  <!-- girl from behind -->
+  <g id="girl">
+   <path d="M230 1920 Q240 1500 540 1460 Q840 1500 850 1920 Z" fill="#7B2CFF"/>
+   <path d="M230 1920 Q240 1500 540 1460 Q840 1500 850 1920 Z" fill="none" stroke="#5a1fc0" stroke-width="6"/>
+   <rect x="480" y="1380" width="120" height="110" fill="#c68c5a"/>
+   <circle cx="540" cy="1260" r="175" fill="#2b1a12"/>
+   <circle cx="540" cy="1060" r="80" fill="#2b1a12"/>
+   <path d="M600 1150 Q650 1280 690 1420" stroke="#3d2618" stroke-width="20" fill="none" stroke-linecap="round"/>
+   <path d="M360 1250 Q360 1060 540 1060 Q720 1060 720 1250" stroke="#D93A5E" stroke-width="34" fill="none" stroke-linecap="round"/>
+   <rect x="320" y="1210" width="70" height="140" rx="30" fill="#D93A5E"/><rect x="690" y="1210" width="70" height="140" rx="30" fill="#D93A5E"/>
+  </g>
+ </svg>
+ <div class="pill grn" style="background:#0f2b1c;border:4px solid #2ED47A">EN EL JUEGO</div>
+ <div class="big" id="t1" style="top:300px;font-size:120px">Bien <span class="grn">juiciosa</span> ✔</div>
+</div>
+
+<!-- ESCENA 2: LA VIDA REAL -->
+<div class="scene" id="s2">
+ <svg class="bg" viewBox="0 0 1080 1920">
+  <defs><radialGradient id="g2" cx="50%" cy="60%" r="60%"><stop offset="0" stop-color="#3a3226"/><stop offset="1" stop-color="#0c0a08"/></radialGradient></defs>
+  <rect width="1080" height="1920" fill="url(#g2)"/>
+  <g stroke="#ffffff" stroke-opacity=".05" stroke-width="3"><path d="M0 500 H1080 M0 650 H1080 M0 800 H1080 M180 400 V900 M360 400 V900 M540 400 V900 M720 400 V900 M900 400 V900"/></g>
+  <rect x="60" y="880" width="960" height="760" rx="60" fill="#2b2f33" stroke="#444a50" stroke-width="10"/>
+  <rect x="110" y="930" width="860" height="660" rx="44" fill="#1a1d20"/>
+  <path d="M800 880 V760 Q800 700 740 700 H660" stroke="#6b7278" stroke-width="30" fill="none" stroke-linecap="round"/>
+  <ellipse cx="320" cy="1480" rx="120" ry="34" fill="#cfcfcf" opacity=".5"/><ellipse cx="760" cy="1500" rx="110" ry="30" fill="#bdbdbd" opacity=".45"/>
+  <g id="pan">
+   <rect x="740" y="1210" width="320" height="64" rx="30" fill="#151515" transform="rotate(-18 740 1240)"/>
+   <circle cx="500" cy="1250" r="290" fill="#121212" stroke="#2c2c2c" stroke-width="22"/>
+   <circle cx="500" cy="1250" r="240" fill="#1b1a17"/>
+   <g fill="#7d5d22" opacity=".95"><ellipse cx="430" cy="1180" rx="70" ry="40"/><ellipse cx="580" cy="1300" rx="90" ry="45"/><ellipse cx="470" cy="1350" rx="40" ry="22"/><ellipse cx="610" cy="1160" rx="34" ry="20"/></g>
+   <g fill="#a3822f"><circle cx="400" cy="1260" r="12"/><circle cx="520" cy="1220" r="9"/><circle cx="650" cy="1240" r="14"/><circle cx="380" cy="1320" r="8"/><circle cx="540" cy="1390" r="10"/></g>
+   <g fill="#3b2a12"><circle cx="460" cy="1230" r="6"/><circle cx="560" cy="1340" r="7"/><circle cx="600" cy="1200" r="5"/></g>
+   <path d="M900 1150 q30 -20 60 0 q30 20 60 0" stroke="#c68c5a" stroke-width="0" fill="none"/>
+   <g fill="#c68c5a" stroke="#8a5a32" stroke-width="6"><rect x="880" y="1100" width="150" height="70" rx="34" transform="rotate(-18 880 1100)"/><rect x="870" y="1170" width="150" height="62" rx="30" transform="rotate(-18 870 1170)"/></g>
+  </g>
+  <g id="stink" stroke="#8bc34a" stroke-width="14" fill="none" stroke-linecap="round" opacity=".8">
+   <path d="M380 900 q-40 -60 0 -120 q40 -60 0 -120"/><path d="M520 880 q-40 -60 0 -120 q40 -60 0 -120"/><path d="M660 900 q-40 -60 0 -120 q40 -60 0 -120"/></g>
+  <g id="fly1"><ellipse cx="0" cy="0" rx="16" ry="11" fill="#111"/><ellipse cx="-8" cy="-14" rx="12" ry="7" fill="#cfe8ff" opacity=".8"/><ellipse cx="8" cy="-14" rx="12" ry="7" fill="#cfe8ff" opacity=".8"/></g>
+  <g id="fly2"><ellipse cx="0" cy="0" rx="14" ry="10" fill="#111"/><ellipse cx="-7" cy="-12" rx="10" ry="6" fill="#cfe8ff" opacity=".8"/><ellipse cx="7" cy="-12" rx="10" ry="6" fill="#cfe8ff" opacity=".8"/></g>
+ </svg>
+ <div class="pill red" style="background:#2b0f0f;border:4px solid #FF4D4D">EN LA VIDA REAL</div>
+ <div class="big" id="t2a" style="top:300px;font-size:116px">Ese sartén lleva</div>
+ <div class="big" id="t2b" style="top:420px;font-size:150px"><span class="red">4 días</span> ahí</div>
+</div>
+
+<!-- ESCENA 3: EL PERRO JUEZ -->
+<div class="scene" id="s3">
+ <svg class="bg" viewBox="0 0 1080 1920">
+  <defs><radialGradient id="g3" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#2a2340"/><stop offset="1" stop-color="#0a0812"/></radialGradient></defs>
+  <rect width="1080" height="1920" fill="url(#g3)"/>
+  <rect x="0" y="1500" width="1080" height="12" fill="url(#rgb)" opacity=".7"/>
+  <g id="dog">
+   <ellipse cx="270" cy="980" rx="110" ry="260" fill="#5e3a1a" transform="rotate(18 270 980)"/>
+   <ellipse cx="810" cy="980" rx="110" ry="260" fill="#5e3a1a" transform="rotate(-18 810 980)"/>
+   <ellipse cx="540" cy="960" rx="300" ry="300" fill="#8B5A2B"/>
+   <ellipse cx="540" cy="1150" rx="190" ry="150" fill="#c48a52"/>
+   <ellipse cx="540" cy="1080" rx="70" ry="48" fill="#1a1010"/><ellipse cx="520" cy="1066" rx="18" ry="10" fill="#fff" opacity=".5"/>
+   <path d="M540 1128 V1180 M470 1200 Q540 1200 610 1200" stroke="#3a2210" stroke-width="10" fill="none" stroke-linecap="round"/>
+   <g id="eyes">
+    <ellipse cx="420" cy="900" rx="62" ry="56" fill="#fff"/><ellipse cx="660" cy="900" rx="62" ry="56" fill="#fff"/>
+    <circle cx="430" cy="918" r="30" fill="#3b2412"/><circle cx="670" cy="918" r="30" fill="#3b2412"/>
+    <circle cx="438" cy="910" r="9" fill="#fff"/><circle cx="678" cy="910" r="9" fill="#fff"/>
+    <rect x="350" y="836" width="140" height="62" fill="#8B5A2B"/><rect x="590" y="836" width="140" height="62" fill="#8B5A2B"/>
+    <path d="M356 898 H486 M594 898 H724" stroke="#5e3a1a" stroke-width="8" stroke-linecap="round"/>
+   </g>
+   <path id="browL" d="M360 800 L480 820" stroke="#3a2210" stroke-width="20" stroke-linecap="round"/>
+   <path id="browR" d="M600 820 L720 790" stroke="#3a2210" stroke-width="20" stroke-linecap="round"/>
+  </g>
+ </svg>
+ <div class="cap" id="t3a" style="top:250px;font-size:56px">El perro viéndote:</div>
+ <div class="big" id="t3b" style="top:1400px;font-size:200px"><span class="hl">¿EN SERIO?</span></div>
+</div>
+
+<!-- CIERRE -->
+<div class="scene" id="s4">
+ <svg class="bg" viewBox="0 0 1080 1920"><defs><radialGradient id="g4" cx="50%" cy="30%" r="75%"><stop offset="0" stop-color="#3b1a5e"/><stop offset="1" stop-color="#0d0a18"/></radialGradient></defs><rect width="1080" height="1920" fill="url(#g4)"/></svg>
+ <div class="av" id="av4" style="left:340px;top:250px;width:400px;height:400px"><img src="avatar.jpg"></div>
+ <div class="cap" id="c1" style="top:740px;font-size:62px">En el juego todos son <span class="grn">amas de casa</span>…</div>
+ <div class="cap" id="c2" style="top:960px;font-size:62px">…en la vida real <span class="red">ni un plato lavan.</span></div>
+ <div class="pill" id="c3" style="top:1230px;background:#D93A5E;color:#fff">Etiqueta al que es así</div>
+ <svg id="dogmini" viewBox="0 0 1080 1920" style="position:absolute;left:640px;top:1330px;width:420px;height:747px"><use href="#dog"/></svg>
+</div>
+
+<div id="handle">@george<span>crux1</span></div>
+<div id="flash"></div>
+<script>
+const T={s0:[0,5200],s1:[5200,9300],s2:[9300,14000],s3:[14000,17800],s4:[17800,23500]};
+const SP='cubic-bezier(.2,1.5,.35,1)',OUT='cubic-bezier(.16,1,.3,1)';
+const $=id=>document.getElementById(id);
+function A(el,kf,t,d,e=OUT,x={}){return el.animate(kf,{delay:t,duration:d,fill:'both',easing:e,...x})}
+function pop(id,t){A($(id),[{opacity:0,transform:'scale(.3) rotate(-6deg)'},{opacity:1,transform:'scale(1) rotate(0)'}],t,450,SP)}
+function up(id,t){A($(id),[{opacity:0,transform:'translateY(60px)'},{opacity:1,transform:'none'}],t,400,SP)}
+window.build=function(){
+ // hook
+ A($('av0'),[{transform:'scale(.2)'},{transform:'scale(1)'}],0,500,SP);
+ A($('av0'),[{translate:'0 0'},{translate:'-14px 6px'},{translate:'12px -8px'},{translate:'-10px -4px'},{translate:'0 0'}],500,300,'linear',{iterations:3});
+ A($('anger'),[{opacity:0,transform:'scale(0)'},{opacity:1,transform:'scale(1)'}],350,300,SP);
+ A($('anger'),[{transform:'scale(1)'},{transform:'scale(1.2)'},{transform:'scale(1)'}],700,400,'ease-in-out',{iterations:10});
+ A($('rays'),[{transform:'rotate(0deg)'},{transform:'rotate(40deg)'}],0,4800,'linear');$('rays').style.transformOrigin='540px 640px';
+ pop('h1',200);up('h2',1300);up('h3',2600);
+ // s1
+ const s1=T.s1[0];up('t1',s1+300);
+ A($('sponge'),[{transform:'translateX(0)'},{transform:'translateX(80px)'},{transform:'translateX(0)'}],s1,500,'ease-in-out',{iterations:10});
+ A($('bubbles'),[{transform:'translateY(0)',opacity:.9},{transform:'translateY(-60px)',opacity:0}],s1,900,'linear',{iterations:6});
+ A($('spark'),[{opacity:0},{opacity:1},{opacity:0}],s1,700,'ease-in-out',{iterations:7});
+ A($('glow'),[{filter:'blur(60px) hue-rotate(0deg)'},{filter:'blur(60px) hue-rotate(360deg)'}],s1,2000,'linear',{iterations:3});
+ A($('strip'),[{filter:'hue-rotate(0deg)'},{filter:'hue-rotate(360deg)'}],s1,1500,'linear',{iterations:4});
+ A($('mon'),[{filter:'hue-rotate(0deg)'},{filter:'hue-rotate(360deg)'}],s1,2000,'linear',{iterations:3});
+ A($('girl'),[{transform:'translateY(0)'},{transform:'translateY(-8px)'},{transform:'translateY(0)'}],s1,1200,'ease-in-out',{iterations:4});
+ // s2 hard cut + shake
+ const s2=T.s2[0];A($('flash'),[{opacity:.9},{opacity:0}],s2,250,'linear',{fill:'forwards'});
+ A($('s2'),[{translate:'0 0'},{translate:'-30px 14px'},{translate:'26px -18px'},{translate:'-16px 10px'},{translate:'0 0'}],s2,400,'linear',{fill:'none'});
+ A($('pan'),[{transform:'scale(1.25)'},{transform:'scale(1)'}],s2,700,SP);$('pan').style.transformOrigin='540px 1250px';
+ A($('pan'),[{transform:'scale(1)'},{transform:'scale(1.06)'}],s2+700,4000,'linear',{fill:'forwards'});
+ A($('stink'),[{transform:'translateY(0)',opacity:.8},{transform:'translateY(-80px)',opacity:0}],s2,1100,'ease-out',{iterations:5});
+ const fly=(id,cx,cy,r,ph)=>{const el=$(id);el.animate(Array.from({length:13},(_,i)=>{const a=ph+i/12*Math.PI*2;return{transform:`translate(${cx+Math.cos(a)*r}px,${cy+Math.sin(a*2)*r*.4}px) rotate(${Math.cos(a)*30}deg) scale(2.4)`}}),{delay:s2,duration:1500,iterations:4,fill:'both'})};
+ fly('fly1',480,1000,220,0);fly('fly2',600,1080,180,2);
+ up('t2a',s2+250);pop('t2b',s2+700);
+ // s3 dog
+ const s3=T.s3[0];$('dog').style.transformOrigin='540px 960px';
+ A($('dog'),[{transform:'scale(.9)'},{transform:'scale(1.18)'}],s3,3800,'cubic-bezier(.3,0,.2,1)');
+ A($('browR'),[{transform:'translateY(0)'},{transform:'translateY(-40px)'}],s3+1100,250,SP);
+ A($('dog'),[{rotate:'0deg'},{rotate:'-6deg'}],s3+1100,300,SP);
+ up('t3a',s3+150);pop('t3b',s3+1100);
+ // s4
+ const s4=T.s4[0];A($('av4'),[{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'scale(1)'}],s4,500,SP);
+ up('c1',s4+300);up('c2',s4+1900);pop('c3',s4+3300);
+ A($('c3'),[{scale:'1'},{scale:'1.07'},{scale:'1'}],s4+3800,700,'ease-in-out',{iterations:3});
+ A($('dogmini'),[{transform:'translateY(300px)'},{transform:'translateY(0)'}],s4+1000,700,SP);
+ document.getAnimations().forEach(a=>a.pause());
+};
+window.seek=ms=>{document.getAnimations().forEach(a=>a.currentTime=ms);
+ for(const [id,[a,b]] of Object.entries(T)) $(id).style.opacity=(ms>=a&&ms<b)?1:0;};
+window.TOTAL=23500;
+</script></body></html>

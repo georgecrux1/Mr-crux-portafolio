@@ -1,0 +1,85 @@
+# Rutina diaria — 4 posts de TDAH para @georgecrux1
+
+Cuenta de TikTok en español (Colombia/Latam) sobre TDAH, contada por alguien que lo vive. Avatar: personaje con gorro vinotinto y gafas (`avatar.jpg`). Se entregan 4 posts nuevos al día, a las **9:00 am hora Colombia**.
+
+Tono: cercano, sin culpa y con humor suave, pero con datos que se puedan verificar. Referencia: cuentas de TDAH en Instagram como @tdahangelvalor. La red del entorno bloquea Instagram, así que no se pudo analizar esa cuenta. No copiar su contenido.
+
+## 0. Preparar el entorno
+
+- Rama `ccr-3d8e766c-12ml39` de `georgecrux1/Mr-crux-portafolio`. Si la carpeta `tdah-contenido/` no existe, ejecutar `git fetch origin ccr-3d8e766c-12ml39 && git checkout ccr-3d8e766c-12ml39`.
+- Herramientas: Node con Playwright (preinstalado) y ffmpeg.
+- Trabajar en `<scratchpad>/dia-AAAA-MM-DD/`, nunca dentro del repo (los MP4 y MP3 no se suben).
+- Leer `historial.md` para no repetir temas ni datos de días anteriores.
+
+## 1. Investigar (WebSearch)
+
+Cada día van 4 posts, uno de cada tipo:
+
+1. **Noticia**: estudio, congreso o noticia de salud sobre TDAH de los últimos 1–7 días.
+2. **Dato curioso**: una cifra o hallazgo llamativo que venga de un estudio o de una institución (puede ser de los últimos 2 años).
+3. **Cómo lidiar con él**: 3–4 estrategias prácticas (tiempo, foco, orden, emociones, dinero, sueño, trabajo, estudio, pareja).
+4. **Mito vs realidad**, o una pregunta para la comunidad ("¿te pasa?").
+
+Fuentes confiables, de mejor a peor: OMS/OPS, CDC, NIMH, NICE/NHS, CHADD, ADDitude (para estrategias), universidades (UCL, Karolinska, etc.), revistas (JAMA, Lancet, Nature, Frontiers), Society for Neuroscience, EurekAlert, ScienceDaily, Medical Xpress, PsyPost, psiquiatria.com, Infocop, y medios grandes (El País, BBC Mundo, Infobae, El Tiempo).
+
+Reglas:
+- **Nunca inventar** cifras ni estudios. Si no se puede verificar, no se usa.
+- Un estudio presentado en un congreso, o que todavía no ha sido revisado por pares, se marca así: "estudio sin publicar" / "según…". Lo que es solo asociación se marca como **"asociación, no causa"**.
+- **Nada de consejos de medicación** (dosis, empezar o dejar un medicamento, marcas). Se puede contar qué dice un estudio sobre los medicamentos, sin recomendar nada.
+- No diagnosticar ("si te pasa esto, tienes TDAH" está prohibido). Usar frases como "a muchas personas con TDAH les pasa".
+- Nota: la red del entorno suele bloquear los sitios de noticias. Si no se puede abrir la página, verificar con 2 búsquedas que coincidan y decirlo en la entrega.
+- No descargar ni volver a subir videos de otros. Para reaccionar a un clip se usa Stitch o Dúo.
+
+## 2. Escribir los 4 posts
+
+- Guion de voz de **20–35 palabras** (unos 10–12 s), en español neutro latino, con gancho al inicio y CTA al final.
+- Para la voz Piper, escribir los números en letras ("cuarenta y dos por ciento") y evitar palabras en inglés.
+- Layout `texto` de `render_dia.js`. Qué usar según el tipo:
+  - Noticia → `head` + `subs`.
+  - Dato curioso → `big` (la cifra) + `subs`.
+  - Cómo lidiar → `list` con `check: true` (4 puntos de máximo 28 caracteres).
+  - Mito vs realidad → `vs: [["MITO","…"],["REALIDAD","…"]]` + 1 `sub`.
+- `kicker` de **máximo 20 caracteres** (si es más largo, choca con el avatar). `cta` corto, que quepa en 1 línea (máximo unos 26 caracteres).
+- `intro` (el texto sobre el avatar al inicio): 1–3 palabras.
+- `credit` obligatorio: `Fuente: … ` o `Según: …`, más `· No reemplaza consulta médica` cuando quepa.
+- Paleta del avatar (ya está en las plantillas): fondo #17212C, vinotinto #D93A5E, amarillo #F2C14E.
+
+## 3. Voz
+
+- **Principal: ElevenLabs.** `creative_generate_speech` con `voice_id` = `ow6VFT4afzoaAR90VHXT` (GEORGE CRUX), `model_id` = `eleven_v4`, **`generations_count` = 1**. Se puede iniciar un tag de emoción (`[curious]`, `[warm]`). Consultar con `creative_get_flow_run_status` y descargar cada `content_url` con curl a `audio/NN.mp3`. Nunca repetir una generación para "reintentar".
+- **Respaldo de voz (si no hay créditos; el 25/11/2026 quedaban 70):** Piper.
+  ```
+  python3 -m venv venv && ./venv/bin/pip install piper-tts
+  curl -sSL -o voz.tar.gz https://github.com/rhasspy/piper/releases/download/v0.0.2/voice-es-carlfm-x-low.tar.gz && tar xzf voz.tar.gz
+  echo "texto" | ./venv/bin/piper -m es-carlfm-x-low.onnx -c es-carlfm-x-low.onnx.json -f NN.wav --length-scale 0.9
+  ffmpeg -i NN.wav -b:a 192k audio/NN.mp3
+  ```
+  (Ojo: el archivo del release es un .tar.gz, aunque se llame distinto.) Avisar al usuario que se usó la voz gratuita.
+
+## 4. Renderizar
+
+```
+cd tdah-contenido && node render_dia.js <dia>/posts.json <dia>/out
+```
+
+Revisar con Read el `_ultimo_frame.png` de cada post: que no haya texto encimado (CTA vs crédito, kicker vs avatar) ni cortado. Si algo falla, corregir el JSON y volver a renderizar solo ese post.
+
+Las otras plantillas (`secretos.html`, `poema.html`, `vangogh.html`, `comedia_platos.html`, `tarjeta.html`, `frame.html`) también tienen ya los colores y el @ nuevos, para formatos especiales. `comedia_platos.html` trae textos fijos de un sketch: revisarlos antes de usarla.
+
+## 5. Entregar
+
+- **SendUserFile** con los 4 MP4, `status: "proactive"`.
+- Mensaje en español, corto (el usuario tiene TDAH). Por cada post:
+  - Título.
+  - Fuente con link y qué tan confirmada está.
+  - Texto de publicación con 3–5 hashtags (#tdah #tdahadultos #neurodivergente #saludmental + 1 del tema).
+  - Hora sugerida para publicarlo (9:00 am, 1:00 pm, 7:00 pm o 9:30 pm).
+- Agregar a `historial.md` la fecha y los 4 temas con sus fuentes. Hacer commit y push a la rama `ccr-3d8e766c-12ml39`.
+
+## Qué NO hacer
+
+- No usar logos ni arte de marcas, instituciones o medicamentos.
+- No inventar estudios, cifras ni testimonios.
+- No dar consejos de medicación ni diagnosticar.
+- No usar música comercial.
+- No publicar nada directamente en TikTok ni en Instagram.
