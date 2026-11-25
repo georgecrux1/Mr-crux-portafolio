@@ -36,3 +36,9 @@ Formato: fecha — tema — link
 - Huevo de pascua: gorros de Mario y Luigi en Lummox County — fuentes: Nintendo Life, TweakTown
 - Teoría: el bar Skeeter's (South Park) en el sur de Hamlet — fuente: GameRant
 - Anuncio: cartas oficiales de GTA VI de Panini, sin precio ni fecha — fuente: Yahoo (live updates)
+
+## 2026-11-25 (voz gratuita Piper; ElevenLabs no disponible en la sesión)
+- Huevo de pascua: portal a la Vice City de PS2 (Key Lento, «Life Is Passing Me By»), hallazgo de Memeio — fuentes: Kotaku, Pure Xbox
+- Según jugadores: misión secreta del Infierno contra Satanás (desde el Capítulo 2) — fuente: GamingBible
+- Huevo de pascua: guiño a las Tortugas Ninja en la represa Tallaloko — fuente: VGTimes
+- Error viral, según jugadores: PS5 que se apaga (posible calor) — fuente: VGTimes (noticias)

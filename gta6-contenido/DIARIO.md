@@ -68,3 +68,4 @@ Revisar con Read el `_ultimo_frame.png` de cada post: que no haya texto encimado
 
 ## Respaldo de voz
 Si ElevenLabs no tiene créditos, usar Piper (voz es-carlfm-x-low) con length-scale 0.9: piper-tts en un venv más el modelo de GitHub rhasspy/piper, release v0.0.2. Avisar al usuario que es una voz gratuita.
+Si generas varias voces en un bucle `while read`, usa `ffmpeg -nostdin`. Si no, ffmpeg se come las líneas siguientes.
