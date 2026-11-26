@@ -47,14 +47,15 @@ Reglas:
 ## 3. Voz
 
 - **Principal: ElevenLabs.** `creative_generate_speech` con `voice_id` = `ow6VFT4afzoaAR90VHXT` (GEORGE CRUX), `model_id` = `eleven_v4`, **`generations_count` = 1**. Se puede iniciar un tag de emoción (`[curious]`, `[warm]`). Consultar con `creative_get_flow_run_status` y descargar cada `content_url` con curl a `audio/NN.mp3`. Nunca repetir una generación para "reintentar".
-- **Respaldo de voz (si no hay créditos; el 25/11/2026 quedaban 70):** Piper.
+- **Respaldo de voz (si no hay créditos; el 25/11/2026 quedaban 70):** Piper con la voz **es_MX-claude-high** (escogida por el usuario porque se entiende mejor; NO usar es-carlfm-x-low). Se baja de GitHub (HuggingFace está bloqueado):
   ```
   python3 -m venv venv && ./venv/bin/pip install piper-tts
-  curl -sSL -o voz.tar.gz https://github.com/rhasspy/piper/releases/download/v0.0.2/voice-es-carlfm-x-low.tar.gz && tar xzf voz.tar.gz
-  echo "texto" | ./venv/bin/piper -m es-carlfm-x-low.onnx -c es-carlfm-x-low.onnx.json -f NN.wav --length-scale 0.9
+  curl -sSL https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-es_MX-claude-high.tar.bz2 | tar xj
+  M=vits-piper-es_MX-claude-high/es_MX-claude-high.onnx
+  echo "texto" | ./venv/bin/piper -m $M -c $M.json -f NN.wav --length-scale 1.0 --sentence-silence 0.15
   ffmpeg -i NN.wav -b:a 192k audio/NN.mp3
   ```
-  (Ojo: el archivo del release es un .tar.gz, aunque se llame distinto.) Avisar al usuario que se usó la voz gratuita.
+  Avisar al usuario que se usó la voz gratuita.
 
 ## 4. Renderizar
 
