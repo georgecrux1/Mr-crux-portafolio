@@ -46,6 +46,14 @@ Reglas:
 
 ## 3. Voz
 
+- **Principal desde el 26/11/2026: voz clonada GRATIS con Chatterbox Multilingual** (Resemble AI, licencia MIT, corre en CPU, unos 50 s por audio). Referencia: `voz/referencia_voz.wav` (16 s de "Voz gruesa Jorge"; si el usuario manda su voz real, reemplazar este archivo).
+  ```
+  python3 -m venv cb && ./cb/bin/pip install chatterbox-tts "setuptools<81"
+  HF_HUB_DISABLE_XET=1 ./cb/bin/python -I tdah-contenido/voz/cb_batch.py tdah-contenido/voz/referencia_voz.wav <dia>/papel.json <dia>/audio
+  ```
+  Genera `audio/01.mp3`…`04.mp3` a partir del campo `script` de cada post. La primera vez descarga los modelos de HuggingFace (el entorno ya tiene permitidos huggingface.co y sus CDN). Escribir los números en letras dentro de `script`.
+- Si Chatterbox falla, usar ElevenLabs (si hay créditos) o Piper (abajo).
+
 - **Principal: ElevenLabs.** `creative_generate_speech` con `voice_id` = `ow6VFT4afzoaAR90VHXT` (GEORGE CRUX), `model_id` = `eleven_v4`, **`generations_count` = 1**. Se puede iniciar un tag de emoción (`[curious]`, `[warm]`). Consultar con `creative_get_flow_run_status` y descargar cada `content_url` con curl a `audio/NN.mp3`. Nunca repetir una generación para "reintentar".
 - **Respaldo de voz (si no hay créditos; el 25/11/2026 quedaban 70):** Piper con la voz **es_MX-claude-high** (escogida por el usuario porque se entiende mejor; NO usar es-carlfm-x-low). Se baja de GitHub (HuggingFace está bloqueado):
   ```
