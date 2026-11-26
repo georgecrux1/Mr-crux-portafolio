@@ -57,8 +57,23 @@ Reglas:
   ```
   Avisar al usuario que se usó la voz gratuita.
 
-## 4. Renderizar
+## 4. Renderizar (estilo papel, el que escogió el usuario)
 
+Estilo "papercraft stop-motion", versión gratis, basada en `echo-labs-pitch/STYLE-GUIDE.md` (rama `ccr-ef1ba7d2-pmpv9c`) pero sin escenas de IA:
+- Diorama de cartulina, personaje del gorro en papel (`personaje_papel.png`, hecho con `papelizar.py` desde la hoja de personaje).
+- Paleta: burdeos #7A1F2B, ámbar #E8A33D, teal #1F5C63, crema #F3E9D8, tinta #1E1A17.
+- Tipografía: Archivo Black (títulos) e Inter 700 (subtítulos), con la palabra que suena en burdeos.
+- Letras que se despliegan con spring, etiquetas que caen y se balancean, temblor stop-motion, grano, viñeta.
+
+```
+cd tdah-contenido && node render_papel.js <dia>/papel.json <dia>/out
+```
+
+Campos del JSON: ver el encabezado de `render_papel.js`. Obligatorios: `script`, que es el texto EXACTO de la voz (de ahí salen los subtítulos). `sync` es la lista de palabras clave en las que aparece cada tarjeta, en orden: big → vs → list → subs. El título se ajusta solo de tamaño. Máximo: 2 subs, 4 ítems en `list`, o 1 `vs` + 1 sub.
+
+Si hay créditos en Higgsfield o ElevenLabs, se pueden agregar escenas de IA de fondo según la guía de Echo Labs (gemini-3-pro-image + kling-3-pro), pero solo si el usuario lo pide.
+
+Plantilla anterior (neón), por si se necesita:
 ```
 cd tdah-contenido && node render_dia.js <dia>/posts.json <dia>/out
 ```
