@@ -42,3 +42,9 @@ Formato: fecha — tema — link
 - Según jugadores: misión secreta del Infierno contra Satanás (desde el Capítulo 2) — fuente: GamingBible
 - Huevo de pascua: guiño a las Tortugas Ninja en la represa Tallaloko — fuente: VGTimes
 - Error viral, según jugadores: PS5 que se apaga (posible calor) — fuente: VGTimes (noticias)
+
+## 2026-11-26 (voz gratuita Piper)
+- Noticia: el hacker del leak de 2022 se declaró culpable de extorsión — fuente: Polygon (vía VGTimes/NewsNow)
+- Error viral: glitch de Jason en calzoncillos en la misión «Breakfast Run» — fuente: inkl
+- Según jugadores: guiños a Silent Hill, Manhunt y Saw — fuente: Bloody Disgusting
+- Sin confirmar: truco de dinero con la van de peluches (Flying Teddies) y el garaje — fuente: ezg.com
