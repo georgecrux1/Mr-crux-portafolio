@@ -48,3 +48,9 @@ Formato: fecha — tema — link
 - Error viral: glitch de Jason en calzoncillos en la misión «Breakfast Run» — fuente: inkl
 - Según jugadores: guiños a Silent Hill, Manhunt y Saw — fuente: Bloody Disgusting
 - Sin confirmar: truco de dinero con la van de peluches (Flying Teddies) y el garaje — fuente: ezg.com
+
+## 2026-11-27 (voz gratuita Piper)
+- Alerta PC: Take-Two borró 3.007 repositorios del port pirata; riesgo de malware — fuentes: PC Games Hardware, Windows Central
+- Teoría: Jason y Lucia serían clones (un científico y dos cuerpos en un desagüe) — fuentes: TheGamer, AOL/Soapcentral
+- Según jugadores: emboscada de un payaso tipo Pennywise en un ascensor — fuente: The Loadout
+- Tip: mapas de secretos hechos por fans (Leonida Live, Secrets of Leonida) — fuentes: leonidalive.app, secretsofleonida.com
