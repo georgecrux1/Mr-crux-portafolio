@@ -54,3 +54,9 @@ Formato: fecha — tema — link
 - Teoría: Jason y Lucia serían clones (un científico y dos cuerpos en un desagüe) — fuentes: TheGamer, AOL/Soapcentral
 - Según jugadores: emboscada de un payaso tipo Pennywise en un ascensor — fuente: The Loadout
 - Tip: mapas de secretos hechos por fans (Leonida Live, Secrets of Leonida) — fuentes: leonidalive.app, secretsofleonida.com
+
+## 2026-11-28 (voz gratuita Piper)
+- Noticia, según reportes: 75% de los empleados de Rockstar votó en contra del sindicato — fuente: GamesRadar (hub de GTA 6)
+- Error viral, según jugadores: glitch que bloquea partidas guardadas (consejo: slot de respaldo) — fuente: VGTimes (noticias)
+- Según jugadores: un loro que habla revela un dinero escondido — fuente: GameRiv
+- Según jugadores: base secreta de investigación alienígena — fuente: GameRiv
